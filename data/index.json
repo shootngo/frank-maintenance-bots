@@ -10,15 +10,14 @@
       "priority": 1
     }
   ],
-  "pageShards": [],
+  "pageShards": [
+    "data/pages.json"
+  ],
   "stats": {
-    "pageCount": 251,
-    "pages": 251,
-    "shards": 0,
-    "mode": "gzip-corpus-v1",
-    "withImage": 0,
-    "diagramCount": 135,
-    "refCount": 40
-  },
-  "corpus": "data/corpus.json"
+    "pageCount": 19,
+    "pages": 19,
+    "shards": 1,
+    "mode": "mvp-text-v1",
+    "withImage": 0
+  }
 }
