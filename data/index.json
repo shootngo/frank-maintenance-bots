@@ -11,13 +11,37 @@
     }
   ],
   "pageShards": [
-    "data/pages.json"
+    "data/pages-00.json",
+    "data/pages-01.json",
+    "data/pages-02.json",
+    "data/pages-03.json",
+    "data/pages-04.json",
+    "data/pages-05.json",
+    "data/pages-06.json",
+    "data/pages-07.json",
+    "data/pages-08.json",
+    "data/pages-09.json",
+    "data/pages-10.json",
+    "data/pages-11.json",
+    "data/pages-12.json",
+    "data/pages-13.json",
+    "data/pages-14.json",
+    "data/pages-15.json",
+    "data/pages-16.json",
+    "data/pages-17.json",
+    "data/pages-18.json",
+    "data/pages-19.json",
+    "data/pages-20.json",
+    "data/pages-21.json",
+    "data/pages-22.json"
   ],
   "stats": {
-    "pageCount": 19,
-    "pages": 19,
-    "shards": 1,
-    "mode": "mvp-text-v1",
-    "withImage": 0
+    "pageCount": 251,
+    "pages": 251,
+    "shards": 23,
+    "mode": "text+webp-v1",
+    "withImage": 135,
+    "diagramCount": 135,
+    "refCount": 21
   }
 }

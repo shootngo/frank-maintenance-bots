@@ -18,6 +18,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Materialize page shards
+        run: |
+          set -euo pipefail
+          python3 << 'PY'
+          import gzip, json
+          from pathlib import Path
+          data = Path('data')
+          for f in sorted(data.glob('pages-*.json.gz.hex')):
+              out = data / f.name.replace('.json.gz.hex', '.json')
+              raw = gzip.decompress(bytes.fromhex(f.read_text().strip()))
+              json.loads(raw)
+              out.write_bytes(raw)
+              print(f'decoded {f.name} -> {out.name} ({len(raw)} bytes)')
+          for f in sorted(data.glob('pages-*.json.gz.b64')):
+              import base64
+              out = data / f.name.replace('.json.gz.b64', '.json')
+              raw = gzip.decompress(base64.b64decode(f.read_text().strip()))
+              json.loads(raw)
+              out.write_bytes(raw)
+              print(f'decoded {f.name} -> {out.name} ({len(raw)} bytes)')
+          print('pages json', len(list(data.glob('pages-*.json'))))
+          PY
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
