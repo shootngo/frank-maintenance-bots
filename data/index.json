@@ -10,29 +10,15 @@
       "priority": 1
     }
   ],
-  "pageShards": [
-    "data/pages-00.json",
-    "data/pages-01.json",
-    "data/pages-02.json",
-    "data/pages-03.json",
-    "data/pages-04.json",
-    "data/pages-05.json",
-    "data/pages-06.json",
-    "data/pages-07.json",
-    "data/pages-08.json",
-    "data/pages-09.json",
-    "data/pages-10.json",
-    "data/pages-11.json",
-    "data/pages-12.json",
-    "data/pages-13.json"
-  ],
+  "pageShards": [],
   "stats": {
-    "pageCount": 292,
-    "diagramCount": 135,
-    "refCount": 62,
+    "pageCount": 251,
+    "pages": 251,
+    "shards": 0,
+    "mode": "gzip-corpus-v1",
     "withImage": 0,
-    "pages": 292,
-    "shards": 14,
-    "mode": "text-compact-v1"
-  }
+    "diagramCount": 135,
+    "refCount": 40
+  },
+  "corpus": "data/corpus.json"
 }
