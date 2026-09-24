@@ -1,1 +1,89 @@
-PLACEHOLDER
+{
+  "version": 1,
+  "parts": [
+    {
+      "id": "mf135-oil-filter-element",
+      "machine": "mf135",
+      "name": "Engine oil filter (element)",
+      "category": "filter",
+      "oem": [{"number": "835568M92", "brand": "Massey Ferguson / AGCO", "confidence": "verify", "source": "Helpful References (community cross)"}],
+      "cross": [
+        {"number": "51188", "brand": "Wix", "confidence": "verify", "source": "Yesterday's Tractors / Helpful References"},
+        {"number": "51188", "brand": "NAPA Gold", "confidence": "verify", "source": "Wix cross (same element)"}
+      ],
+      "notes": "Confirm housing before buying — some 135s converted to spin-on.",
+      "keywords": ["oil filter", "engine filter", "lube filter"]
+    },
+    {
+      "id": "mf135-oil-filter-spinon",
+      "machine": "mf135",
+      "name": "Engine oil filter (spin-on conversion)",
+      "category": "filter",
+      "oem": [{"number": "1447082M1", "brand": "Massey Ferguson / AGCO", "confidence": "verify", "source": "Helpful References"}],
+      "cross": [
+        {"number": "51460", "brand": "Wix", "confidence": "verify", "source": "Helpful References"}
+      ],
+      "notes": "Only if spin-on adapter is fitted.",
+      "keywords": ["oil filter", "spin-on", "conversion"]
+    },
+    {
+      "id": "mf135-hyd-fluid",
+      "machine": "mf135",
+      "name": "Transmission / hydraulic fluid (shared sump)",
+      "category": "fluid",
+      "oem": [{"number": "M-1129A UTF", "brand": "MF spec", "confidence": "community", "source": "Helpful References / Yesterday's Tractors"}],
+      "cross": [
+        {"number": "Permatran III", "brand": "Aftermarket UTF", "confidence": "community", "source": "Helpful References (Multi-Power / IPTO note)"},
+        {"number": "M-1143", "brand": "MF spec alt", "confidence": "community", "source": "Helpful References when Multi-Power or independent PTO"}
+      ],
+      "notes": "Typical refill about 8 U.S. gallons. Do not use automotive gear oil.",
+      "keywords": ["hydraulic", "transmission", "utf", "fluid", "permatran"]
+    },
+    {
+      "id": "mf135-banjo-washer",
+      "machine": "mf135",
+      "name": "Injection pump banjo crush washer",
+      "category": "gasket",
+      "oem": [
+        {"number": "5936 332C", "brand": "Delphi / CAV", "confidence": "community", "source": "Helpful References / TractorByNet"},
+        {"number": "1038432M1", "brand": "MF (cited)", "confidence": "verify", "source": "Helpful References forum cites"}
+      ],
+      "cross": [
+        {"number": "11354", "brand": "Stanadyne copper", "confidence": "community", "source": "Helpful References"},
+        {"number": "16225", "brand": "Stanadyne steel", "confidence": "community", "source": "Helpful References"}
+      ],
+      "notes": "One washer each side of banjo. Do not reuse flattened copper. Avoid aluminum on injector-outlet banjos.",
+      "keywords": ["crush washer", "banjo", "fuel leak", "copper washer"]
+    },
+    {
+      "id": "mf135-bowl-gasket",
+      "machine": "mf135",
+      "name": "CAV fuel filter / sediment bowl gasket",
+      "category": "gasket",
+      "oem": [
+        {"number": "1039072M1", "brand": "MF", "confidence": "community", "source": "Helpful References"},
+        {"number": "1039073M1", "brand": "MF", "confidence": "verify", "source": "Helpful References"},
+        {"number": "1890150M1", "brand": "MF", "confidence": "verify", "source": "Helpful References"}
+      ],
+      "cross": [
+        {"number": "7111-439", "brand": "Lucas / CAV", "confidence": "community", "source": "Helpful References"}
+      ],
+      "notes": "Hand-tighten bowl only — overtightening cracks glass.",
+      "keywords": ["sediment bowl", "fuel bowl", "gasket", "filter bowl"]
+    },
+    {
+      "id": "mf135-glass-bowl",
+      "machine": "mf135",
+      "name": "CAV glass sediment bowl (deep)",
+      "category": "fuel",
+      "oem": [
+        {"number": "1024386M1", "brand": "MF", "confidence": "community", "source": "Helpful References"},
+        {"number": "7111-403", "brand": "CAV", "confidence": "community", "source": "Helpful References"},
+        {"number": "26560075", "brand": "Perkins", "confidence": "verify", "source": "Helpful References"}
+      ],
+      "cross": [],
+      "notes": "Shallow bowl family also exists (CAV 7111-429). Measure yours.",
+      "keywords": ["glass bowl", "sediment bowl", "fuel bowl"]
+    }
+  ]
+}
