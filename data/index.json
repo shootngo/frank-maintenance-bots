@@ -24,24 +24,15 @@
     "data/pages-10.json",
     "data/pages-11.json",
     "data/pages-12.json",
-    "data/pages-13.json",
-    "data/pages-14.json",
-    "data/pages-15.json",
-    "data/pages-16.json",
-    "data/pages-17.json",
-    "data/pages-18.json",
-    "data/pages-19.json",
-    "data/pages-20.json",
-    "data/pages-21.json",
-    "data/pages-22.json",
-    "data/pages-23.json",
-    "data/pages-24.json"
+    "data/pages-13.json"
   ],
   "stats": {
     "pageCount": 292,
-    "manualPages": 230,
-    "references": 62,
     "diagramCount": 135,
-    "withImage": 0
+    "refCount": 62,
+    "withImage": 0,
+    "pages": 292,
+    "shards": 14,
+    "mode": "text-compact-v1"
   }
 }
