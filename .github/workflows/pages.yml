@@ -18,13 +18,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Materialize page shards
+      - name: Materialize page shards and icons
         run: |
           set -euo pipefail
           python3 << 'PY'
-          import gzip, json
+          import gzip, json, base64, re
           from pathlib import Path
           data = Path('data')
+          # Join hex parts: pages-XX.json.gz.hex.p0 + p1 + ... -> pages-XX.json.gz.hex
+          part_map = {}
+          for f in sorted(data.glob('pages-*.json.gz.hex.p*')):
+              m = re.match(r'(pages-\d+\.json\.gz\.hex)\.p(\d+)$', f.name)
+              if not m:
+                  continue
+              part_map.setdefault(m.group(1), []).append((int(m.group(2)), f))
+          for base, parts in sorted(part_map.items()):
+              parts.sort()
+              out = data / base
+              text = ''.join(p.read_text().strip() for _, p in parts)
+              out.write_text(text)
+              print(f'joined {base} from {len(parts)} parts ({len(text)} chars)')
           for f in sorted(data.glob('pages-*.json.gz.hex')):
               out = data / f.name.replace('.json.gz.hex', '.json')
               raw = gzip.decompress(bytes.fromhex(f.read_text().strip()))
@@ -32,12 +45,39 @@ jobs:
               out.write_bytes(raw)
               print(f'decoded {f.name} -> {out.name} ({len(raw)} bytes)')
           for f in sorted(data.glob('pages-*.json.gz.b64')):
-              import base64
               out = data / f.name.replace('.json.gz.b64', '.json')
               raw = gzip.decompress(base64.b64decode(f.read_text().strip()))
               json.loads(raw)
               out.write_bytes(raw)
               print(f'decoded {f.name} -> {out.name} ({len(raw)} bytes)')
+          icons = Path('icons')
+          icons.mkdir(exist_ok=True)
+          for f in sorted(icons.glob('*.hex')):
+              out = icons / f.name[:-4]
+              out.write_bytes(bytes.fromhex(f.read_text().strip()))
+              print(f'decoded icon {f.name} -> {out.name} ({out.stat().st_size} bytes)')
+          for f in sorted(icons.glob('*.b64')):
+              out = icons / f.name[:-4]
+              out.write_bytes(base64.b64decode(f.read_text().strip()))
+              print(f'decoded icon {f.name} -> {out.name} ({out.stat().st_size} bytes)')
+          img = Path('data/img')
+          if img.exists():
+              for f in sorted(img.glob('*.webp.hex')):
+                  out = img / f.name.replace('.webp.hex', '.webp')
+                  out.write_bytes(bytes.fromhex(f.read_text().strip()))
+                  print(f'decoded img {f.name} -> {out.name} ({out.stat().st_size} bytes)')
+              wmap = {}
+              for f in sorted(img.glob('*.webp.hex.p*')):
+                  m = re.match(r'(.+\.webp\.hex)\.p(\d+)$', f.name)
+                  if m:
+                      wmap.setdefault(m.group(1), []).append((int(m.group(2)), f))
+              for base, parts in sorted(wmap.items()):
+                  parts.sort()
+                  text = ''.join(p.read_text().strip() for _, p in parts)
+                  (img / base).write_text(text)
+                  out = img / base.replace('.webp.hex', '.webp')
+                  out.write_bytes(bytes.fromhex(text))
+                  print(f'joined+decoded img {base} ({out.stat().st_size} bytes)')
           print('pages json', len(list(data.glob('pages-*.json'))))
           PY
       - uses: actions/upload-pages-artifact@v3
