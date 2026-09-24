@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Frank's Maintenance Bots</title>
+  <meta name="description" content="Ask about your equipment — manuals, diagrams, community fixes, parts, and symptom checks.">
+  <meta name="theme-color" content="#142018">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Maint Bots">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <img class="logo" src="icons/icon-192.png" alt="" width="40" height="40">
+      <div class="grow">
+        <h1>Frank's Maintenance Bots</h1>
+        <p class="sub" id="headerSub">Shop Q&amp;A · V 1.0</p>
+      </div>
+      <button type="button" class="icon-btn" id="btnMenu" aria-label="Menu">☰</button>
+    </header>
+
+    <div id="menu" class="menu hidden" role="menu">
+      <button type="button" data-action="check-update">Check for update</button>
+      <button type="button" data-action="settings">Settings</button>
+      <button type="button" data-action="about">About / V 1.0</button>
+      <button type="button" data-action="clear-chat">Clear chat</button>
+    </div>
+
+    <div class="machine-row" id="machineRow" aria-label="Machine filter"></div>
+
+    <main id="chat" class="chat" aria-live="polite"></main>
+
+    <div class="composer">
+      <div class="quick-row">
+        <button type="button" class="chip" id="btnSymptom">What's wrong?</button>
+        <button type="button" class="chip" id="btnParts">Find a part</button>
+      </div>
+      <div class="input-row">
+        <button type="button" class="icon-btn mic" id="btnMic" aria-label="Dictate">🎤</button>
+        <textarea id="q" rows="1" placeholder="Ask about belts, filters, smoke…" enterkeyhint="send"></textarea>
+        <button type="button" class="send" id="btnSend" aria-label="Send">➤</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="overlay" class="overlay hidden"></div>
+  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true">
+    <button type="button" class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <img id="lbImg" alt="Manual page">
+  </div>
+
+  <script>
+    window.FMB_VERSION = 'V 1.0';
+    window.FMB_CACHE = 'fmb-v1.0';
+  </script>
+  <script src="js/ui.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/parts.js"></script>
+  <script src="js/symptoms.js"></script>
+  <script src="js/gemini.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

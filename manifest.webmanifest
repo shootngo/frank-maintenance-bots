@@ -1,0 +1,17 @@
+{
+  "id": "/frank-maintenance-bots/",
+  "name": "Frank's Maintenance Bots",
+  "short_name": "Maint Bots",
+  "description": "Shop-floor Q&A for Frank's equipment — manuals, diagrams, community fixes, parts, and symptom checks.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#142018",
+  "theme_color": "#142018",
+  "lang": "en",
+  "icons": [
+    {"src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}
