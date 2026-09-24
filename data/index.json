@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "appVersion": "V 1.0",
+  "machines": [
+    {
+      "id": "mf135",
+      "name": "Massey Ferguson 135",
+      "short": "MF 135",
+      "notes": "Perkins AD3.152 diesel",
+      "priority": 1
+    }
+  ],
+  "pageShards": [
+    "data/pages-00.json",
+    "data/pages-01.json",
+    "data/pages-02.json",
+    "data/pages-03.json",
+    "data/pages-04.json",
+    "data/pages-05.json",
+    "data/pages-06.json",
+    "data/pages-07.json",
+    "data/pages-08.json",
+    "data/pages-09.json",
+    "data/pages-10.json",
+    "data/pages-11.json",
+    "data/pages-12.json",
+    "data/pages-13.json",
+    "data/pages-14.json",
+    "data/pages-15.json",
+    "data/pages-16.json",
+    "data/pages-17.json",
+    "data/pages-18.json",
+    "data/pages-19.json",
+    "data/pages-20.json",
+    "data/pages-21.json",
+    "data/pages-22.json",
+    "data/pages-23.json",
+    "data/pages-24.json"
+  ],
+  "stats": {
+    "pageCount": 292,
+    "manualPages": 230,
+    "references": 62,
+    "diagramCount": 135,
+    "withImage": 0
+  }
+}
