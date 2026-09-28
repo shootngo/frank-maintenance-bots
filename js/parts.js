@@ -53,5 +53,7 @@
     return 'community';
   }
 
-  w.FMBParts = { load, find, isPartsQuestion, buyLinks, badge, all: () => PARTS };
+  function add(list) { PARTS = PARTS.concat(list || []); return PARTS; }
+
+  w.FMBParts = { load, find, isPartsQuestion, buyLinks, badge, add, all: () => PARTS };
 })(window);

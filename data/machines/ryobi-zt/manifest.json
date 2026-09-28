@@ -1,0 +1,9 @@
+{
+  "slug": "ryobi-zt",
+  "name": "Ryobi Zero-Turn",
+  "status": "soon",
+  "manuals": [],
+  "pageShards": [],
+  "parts": "parts.json",
+  "refs": "refs.json"
+}

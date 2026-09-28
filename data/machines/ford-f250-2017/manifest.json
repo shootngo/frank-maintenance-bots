@@ -1,0 +1,9 @@
+{
+  "slug": "ford-f250-2017",
+  "name": "2017 Ford F-250",
+  "status": "soon",
+  "manuals": [],
+  "pageShards": [],
+  "parts": "parts.json",
+  "refs": "refs.json"
+}

@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "appVersion": "V 1.1",
+  "machines": [
+    {
+      "slug": "mf-135",
+      "name": "Massey Ferguson 135",
+      "short": "MF 135",
+      "legacy": true,
+      "legacyId": "mf135",
+      "notes": "Perkins AD3.152 diesel. Data lives in data/index.json + data/pages-NN.json (unchanged).",
+      "meter": "hours"
+    },
+    {
+      "slug": "jd-f725",
+      "name": "John Deere F725",
+      "short": "JD F725",
+      "notes": "Front-mount mower",
+      "meter": "hours"
+    },
+    {
+      "slug": "ford-f250-2017",
+      "name": "2017 Ford F-250",
+      "short": "F-250",
+      "notes": "Super Duty pickup",
+      "meter": "miles"
+    },
+    {
+      "slug": "subaru-forester-2020",
+      "name": "2020 Subaru Forester",
+      "short": "Forester",
+      "notes": "SUV",
+      "meter": "miles"
+    },
+    {
+      "slug": "ryobi-zt",
+      "name": "Ryobi Zero-Turn",
+      "short": "Ryobi ZT",
+      "notes": "Electric zero-turn mower",
+      "meter": "hours"
+    }
+  ]
+}
