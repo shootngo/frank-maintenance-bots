@@ -1,9 +1,28 @@
 {
   "slug": "jd-f725",
   "name": "John Deere F725",
-  "status": "soon",
-  "manuals": [],
-  "pageShards": [],
+  "manuals": [
+    {
+      "id": "jd-f725-om",
+      "title": "John Deere F725 - Operator's Manual",
+      "pages": 135,
+      "source": "http://manuals.deere.com/cceomview/OMM134807_A9/Output/Index.html"
+    }
+  ],
+  "pageShards": [
+    "pages-00.json",
+    "pages-01.json",
+    "pages-02.json",
+    "pages-03.json",
+    "pages-04.json",
+    "pages-05.json",
+    "pages-06.json",
+    "pages-07.json",
+    "pages-08.json",
+    "pages-09.json",
+    "pages-10.json",
+    "pages-11.json"
+  ],
   "parts": "parts.json",
   "refs": "refs.json"
 }
