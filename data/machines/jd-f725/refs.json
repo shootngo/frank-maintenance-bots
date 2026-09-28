@@ -1,0 +1,156 @@
+{
+ "refs": [
+  {
+   "id": "jd-f725-ref-001",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Official operator manual HTML (OMM134807 A9)",
+   "text": "Free official John Deere viewer for the F725 operator's manual (PIN 090001-). This is the source of the in-app manual pages.",
+   "url": "http://manuals.deere.com/cceomview/OMM134807_A9/Output/Index.html"
+  },
+  {
+   "id": "jd-f725-ref-002",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "GreenTractorTalk: F725 / F700 series discussions",
+   "text": "Search \"F725\" for PTO, hydraulics and deck threads.",
+   "url": "https://www.greentractortalk.com/"
+  },
+  {
+   "id": "jd-f725-ref-003",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Yesterday's Tractors: John Deere lawn/garden forum",
+   "text": "Repair talk on older F-series front mowers.",
+   "url": "https://forums.yesterdaystractors.com/"
+  },
+  {
+   "id": "jd-f725-ref-004",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "TM1493 technical manual (F710/F725)",
+   "text": "The service/technical manual is TM1493, sold by Deere dealers and reprint sites (paid, not in the app). Covers the Kawasaki FD590V engine, Sundstrand hydro and PTO clutch air-gap specs.",
+   "url": "https://servicepartmanuals.com/partmanual/john-deere-f710-f725-front-mowers-technical-manual-tm1493-pdf/"
+  },
+  {
+   "id": "jd-f725-ref-005",
+   "machine": "jd-f725",
+   "type": "reference-notes",
+   "title": "F725 helpful notes: common pain points",
+   "text": "Common F725 owner problems: PTO clutch adjustment, hydraulic/weight-transfer issues, deck leveling, belt replacement. The free operator manual is HTML-only at manuals.deere.com.",
+   "url": null
+  },
+  {
+   "id": "jd-f725-ref-006",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Reddit r/lawnmowers: Consensus on Deere F725s?",
+   "text": "Owner buying advice: oil that is overfilled or smells of fuel usually means the carb is flooding. The Kawasaki liquid-cooled engine is a plus. Check the deck for rust. Lots of grease fittings, but easy to work on.",
+   "url": "https://www.reddit.com/r/lawnmowers/comments/1fzenh5/consensus_on_deere_f725s/"
+  },
+  {
+   "id": "jd-f725-ref-007",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "TractorByNet: Older Deere F725",
+   "text": "Long-time owners: the early Kawasaki FD590V plastic camshaft gear fails around 1,000–2,000 hrs (a steel gear replaced it around 2000). The 48\" deck scalps less than the 54\". The differential lock and weight transfer help traction.",
+   "url": "https://www.tractorbynet.com/forums/threads/older-deere-f725.268266/"
+  },
+  {
+   "id": "jd-f725-ref-008",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "LawnSite: F725 won't start, broken camshaft (Kawasaki 20 hp liquid-cooled)",
+   "text": "Cranks but won't start and the fuel filter is dry. Pulling a valve cover showed no valve movement, caused by a shattered plastic cam gear at ~2,000 hrs. There was no valve damage, and the replacement cam is steel. Replace the lower seal and check the hydro pump belt while you're in there.",
+   "url": "https://www.lawnsite.com/threads/broken-camshaft-on-a-20-h-p-ohv-liquid-cooled-kaw.62269/"
+  },
+  {
+   "id": "jd-f725-ref-009",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Green Tractor Talk: F725 PTO clutch replacement",
+   "text": "The pulley broke free of the PTO clutch. An impact wrench removes the crank bolt without holding the shaft. Put thread locker on the bolt when reinstalling.",
+   "url": "https://www.greentractortalk.com/threads/f725-pto-clutch-replacement.14150/"
+  },
+  {
+   "id": "jd-f725-ref-010",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Lawn Mower Forum: F725 PTO belt adjustment",
+   "text": "Owner fitted new PTO belts but the spring stayed slack. The target is 3/4 in. (19 mm) deflection at mid-span, set by the idler nut per the manual (p.79). Check the spring/cable bracket if you run out of adjustment.",
+   "url": "https://www.lawnmowerforum.com/threads/f725-pto-belt-adjustment.75901/"
+  },
+  {
+   "id": "jd-f725-ref-011",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "My Tractor Forum: \"Mechanic's Special\" Deere F725 restoration",
+   "text": "Full rebuild log: rocker cover gaskets MIU11646 (plus RTV over the O-rings), new drive and PTO belts, low-viscosity hydro fluid. Missing caster bushings, spacers and thrust washers made deck leveling impossible until they were replaced.",
+   "url": "https://www.mytractorforum.com/threads/mechanics-special-deere-f725-the-work-begins.1035105/"
+  },
+  {
+   "id": "jd-f725-ref-012",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Lawn Care Forum: F725 transmission fluid",
+   "text": "The thread quotes an older F725 manual (HY-GARD, or J20A/J20B or M2C33F/G ATF). This PIN 090001+ manual (p.67) says use ONLY John Deere HY-GARD (J20C), do not mix oils, and no type F ATF. Below 0°F use Low Viscosity HY-GARD (J20D).",
+   "url": "https://www.lawnsite.com/threads/trans-fluid-john-deere.152722/"
+  },
+  {
+   "id": "jd-f725-ref-013",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Green Tractor Talk: why hydrostatic drives fade when hot",
+   "text": "Losing drive as it warms up comes from oil thinning and a worn pump letting oil slip past the pistons. Keep the transmission clean and cool, and change oil with the correct fluid.",
+   "url": "https://www.greentractortalk.com/threads/what-makes-hydrostatic-systems-stop-when-they-overheat.187266/"
+  },
+  {
+   "id": "jd-f725-ref-014",
+   "machine": "jd-f725",
+   "type": "reference",
+   "title": "Green Farm Parts: F725 maintenance guide & parts list",
+   "text": "Service parts listed by interval (for example, transmission filter AM103027 every 50 hrs). Cross-check against the manual's Replacement Parts page (p.46).",
+   "url": "https://greenfarmparts.com/john-deere-f725-front-mower-maintenance-guide/"
+  },
+  {
+   "id": "jd-f725-ref-015",
+   "machine": "jd-f725",
+   "type": "reference-notes",
+   "title": "Fix: blades take too long to stop / PTO clutch scraping",
+   "text": "Per the manual (p.66): if blade stop time is over 6 sec, tighten all three PTO clutch nuts the SAME amount (1/2 turn, then 1/4-turn steps). If it scrapes, back off 1/4 turn. Aim for a 3–5 sec stop. The forum-quoted TM spec is a 0.012–0.018 in. air gap at all 3 slots.",
+   "url": null
+  },
+  {
+   "id": "jd-f725-ref-016",
+   "machine": "jd-f725",
+   "type": "reference-notes",
+   "title": "Fix: deck belt slipping, squealing or thrown",
+   "text": "Check the belt for wear or glazing and replace it (48\" M111564 / 54\" M111534). Route it per the picture on p.85–86 without twisting, and re-hook the tension spring with a spring puller. Tighten the gearbox bolts to 70 Nm (50 lb-ft). PTO belts: replace both (AM108054) and set 3/4 in. deflection.",
+   "url": null
+  },
+  {
+   "id": "jd-f725-ref-017",
+   "machine": "jd-f725",
+   "type": "reference-notes",
+   "title": "Fix: engine overheats (F725 liquid-cooled)",
+   "text": "Manual troubleshooting: clean the air intake screen, add oil, run the implement at FAST idle. Also check the coolant level in the recovery tank with the engine cool, and clean the radiator screen. Use a 50/50 ethylene glycol mix (system 3.1 L / 3.3 qt). Replace hoses after 3 years.",
+   "url": null
+  },
+  {
+   "id": "jd-f725-ref-018",
+   "machine": "jd-f725",
+   "type": "reference-notes",
+   "title": "Fix: won't move, or loses drive when hot",
+   "text": "Release the park brake, check the transmission oil level, and let it warm up in cold weather. If drive fades when hot, clean the cooling screens, change the hydro oil (HY-GARD J20C only, per p.67) and filter AM103027, and inspect the transmission belt M75353 (p.70).",
+   "url": null
+  },
+  {
+   "id": "jd-f725-ref-019",
+   "machine": "jd-f725",
+   "type": "reference-notes",
+   "title": "Fix: uneven cut / scalping",
+   "text": "Replace worn or missing caster bushings and spacers, check tire pressure, then level the deck side-to-side and front-to-rear per p.38–40. The 54\" deck is more prone to scalping than the 48\".",
+   "url": null
+  }
+ ]
+}
