@@ -1,9 +1,1 @@
-{
-  "slug": "ford-f250-2017",
-  "name": "2017 Ford F-250",
-  "status": "soon",
-  "manuals": [],
-  "pageShards": [],
-  "parts": "parts.json",
-  "refs": "refs.json"
-}
+{"slug":"ford-f250-2017","name":"2017 Ford F-250","manuals":[{"id":"ford-f250-2017-om","title":"Ford F-250 2017 - Owner's Manual","pages":636,"source":"https://www.fordservicecontent.com/Ford_Content/Catalog/owner_information/2017-Super-Duty-Owners-Manual-version-1_om_EN-US_06_2016.pdf"}],"pageShards":["pages-00.json","pages-01.json","pages-02.json","pages-03.json","pages-04.json","pages-05.json","pages-06.json","pages-07.json","pages-08.json","pages-09.json","pages-10.json","pages-11.json","pages-12.json","pages-13.json","pages-14.json","pages-15.json","pages-16.json","pages-17.json","pages-18.json","pages-19.json","pages-20.json"],"parts":"parts.json","refs":"refs.json"}
