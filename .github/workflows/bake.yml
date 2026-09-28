@@ -1,0 +1,50 @@
+name: Bake data files (one-shot)
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/bake.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Decode shards and icons into real files
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import gzip, json, base64
+          from pathlib import Path
+          data = Path('data')
+          n = 0
+          for f in sorted(data.glob('pages-*.json.gz.hex')):
+              raw = gzip.decompress(bytes.fromhex(f.read_text().strip()))
+              json.loads(raw)
+              assert len(raw) < 15000, (f.name, len(raw))
+              (data / f.name.replace('.json.gz.hex', '.json')).write_bytes(raw); n += 1
+          for f in sorted(data.glob('pages-*.json.gz.b64')):
+              raw = gzip.decompress(base64.b64decode(f.read_text().strip()))
+              json.loads(raw)
+              (data / f.name.replace('.json.gz.b64', '.json')).write_bytes(raw); n += 1
+          idx = json.loads((data / 'index.json').read_text())
+          total = 0
+          for p in idx['pageShards']:
+              total += len(json.loads(Path(p).read_text()))
+          print('shards', n, 'pages', total)
+          assert total >= 250, total
+          for f in sorted(Path('icons').glob('*.png.hex')):
+              b = bytes.fromhex(f.read_text().strip())
+              assert b[:4] == bytes.fromhex('89504e47')
+              Path('icons', f.name[:-4]).write_bytes(b)
+              print('icon', f.name[:-4], len(b))
+          PY
+          git rm -q --ignore-unmatch data/pages-*.json.gz.hex data/pages-*.json.gz.b64 data/pages-*.hex.p* icons/*.hex data/pages.json 'data/corpus.*' || true
+          git rm -rq --ignore-unmatch data/staging || true
+          git add data/pages-*.json icons/*.png
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898528+github-actions[bot]@users.noreply.github.com'
+          git status --short
+          git commit -m 'V 1.0: commit real page shard JSON + PNG icons; drop encoded copies' || echo 'nothing to commit'
+          git push
