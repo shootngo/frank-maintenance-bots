@@ -1,9 +1,32 @@
 {
   "slug": "subaru-forester-2020",
   "name": "2020 Subaru Forester",
-  "status": "soon",
-  "manuals": [],
-  "pageShards": [],
+  "manuals": [
+    {
+      "id": "subaru-forester-2020-om",
+      "title": "Subaru Forester 2020 - Owner's Manual",
+      "pages": 552,
+      "source": "https://cdn.dealereprocess.org/cdn/servicemanuals/subaru/2020-forester.pdf"
+    }
+  ],
+  "pageShards": [
+    "pages-00.json",
+    "pages-01.json",
+    "pages-02.json",
+    "pages-03.json",
+    "pages-04.json",
+    "pages-05.json",
+    "pages-06.json",
+    "pages-07.json",
+    "pages-08.json",
+    "pages-09.json",
+    "pages-10.json",
+    "pages-11.json",
+    "pages-12.json",
+    "pages-13.json",
+    "pages-14.json",
+    "pages-15.json"
+  ],
   "parts": "parts.json",
   "refs": "refs.json"
 }
