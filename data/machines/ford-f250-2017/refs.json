@@ -1,0 +1,188 @@
+{
+"refs": [
+{
+"id": "ford-f250-2017-ref-001",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Official 2017 Super Duty owner's manual PDF",
+"text": "The source of the manual pages in this app. It covers the 6.7L diesel sections; there's no separate 2017 diesel supplement.",
+"url": "https://www.fordservicecontent.com/Ford_Content/Catalog/owner_information/2017-Super-Duty-Owners-Manual-version-1_om_EN-US_06_2016.pdf"
+},
+{
+"id": "ford-f250-2017-ref-002",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Ford.com 2017 F-250 owner manuals portal",
+"text": "Official manual picker on Ford.com.",
+"url": "https://www.ford.com/support/vehicle/f250/2017/owner-manuals/"
+},
+{
+"id": "ford-f250-2017-ref-003",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – CP4 high-pressure fuel pump: still an issue?",
+"text": "CP4.2 failure modes (contamination, poor lubricity) and prevention kits for the 6.7 Power Stroke.",
+"url": "https://www.powerstroke.org/forums/threads/cp4-high-pressure-fuel-pump-still-an-issue.1352599/"
+},
+{
+"id": "ford-f250-2017-ref-004",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Ford-Trucks – Failed HPFP on a 2017",
+"text": "A real 2017 high-pressure fuel pump (CP4) failure thread: symptoms, cost, warranty.",
+"url": "https://www.ford-trucks.com/forums/1552627-failed-hpfp-2017-a.html"
+},
+{
+"id": "ford-f250-2017-ref-005",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – Water in tank / possible CP4 failure (2017 F-250 6.7)",
+"text": "How water contamination leads to pump damage. Drain the water separator and act on the water-in-fuel warning.",
+"url": "https://www.powerstroke.org/forums/threads/water-in-tank-possible-cp4-failure-2017-f250-6-7.1008401/"
+},
+{
+"id": "ford-f250-2017-ref-006",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Ford-Trucks – Early 2017 fuel system problems",
+"text": "Notes on the in-tank pump and filter housing on early 2017 builds.",
+"url": "https://www.ford-trucks.com/forums/1592266-early-2017-fuel-system-problems.html"
+},
+{
+"id": "ford-f250-2017-ref-007",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – CP4.2 disaster prevention kit",
+"text": "Discussion of aftermarket mitigation (bypass/return kits) that keeps CP4 debris out of the injectors.",
+"url": "https://www.powerstroke.org/forums/threads/cp-4-2-disaster-prevention-kit.1322050/"
+},
+{
+"id": "ford-f250-2017-ref-008",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Reddit r/powerstroke – 2017 6.7 longevity recommendations",
+"text": "Owners' habits: Motorcraft oil and fuel filters on a tight interval, coolant test strips at each oil change, one 2017 lost its DEF pump at 94k miles.",
+"url": "https://www.reddit.com/r/powerstroke/comments/15kw37h/2017_67_longevity_recommendations/"
+},
+{
+"id": "ford-f250-2017-ref-009",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – NOx sensors (2017-2019)",
+"text": "2017-19 trucks have TWO NOx sensors (before and after the SCR) plus a tailpipe PM sensor. Front and rear are NOT interchangeable.",
+"url": "https://www.powerstroke.org/threads/nox-sensors.1397447/"
+},
+{
+"id": "ford-f250-2017-ref-010",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – Reduced engine power while towing (P0087 + P249E)",
+"text": "FORScan PID walkthrough. Covers fuel rail pressure vs. DEF injector/NOx sensor as the cause of derate / reduced engine power / no power.",
+"url": "https://www.powerstroke.org/threads/reduced-engine-power-towing-stranded-in-bfe.1411324/page-3"
+},
+{
+"id": "ford-f250-2017-ref-011",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – P0087 low rail pressure on a 2017 6.7",
+"text": "Low fuel rail pressure diagnosis: filters first, then lift pump, then injector return leak or a wearing CP4.",
+"url": "https://www.powerstroke.org/threads/p0087-p087-2017-6-7-powerstroke-medium-duty.1391263/"
+},
+{
+"id": "ford-f250-2017-ref-012",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Powerstroke.org – P20B9 DEF heater circuit open",
+"text": "DEF tank heater fault. Check heater resistance and the connector/wiring before replacing the tank.",
+"url": "https://www.powerstroke.org/threads/p20b9-code-reductant-heater-a-control-circuit-open.1389853/"
+},
+{
+"id": "ford-f250-2017-ref-013",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Apex TechNation – 6.7 P0401 EGR cooler diagnosis",
+"text": "On the 6.7, P0401 almost always means a carbon-restricted EGR cooler, not the EGR valve. Coolant loss or white smoke points to a cracked cooler.",
+"url": "https://apextechnation.com/articles/ford-67-powerstroke-p0401-egr-cooler"
+},
+{
+"id": "ford-f250-2017-ref-014",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "DieselHub – 6.7 Power Stroke changes by model year",
+"text": "What changed for 2017: 925 lb-ft, revised turbo oil supply line and pedestal, added NOx sensor.",
+"url": "https://www.dieselhub.com/powerstroke/6.7-power-stroke-model-year-changes.html"
+},
+{
+"id": "ford-f250-2017-ref-015",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "BD Diesel – 10 common 6.7 Power Stroke problems & real fixes",
+"text": "Boost leaks, fuel contamination, DEF crystallization, cooling under tow. Checks to do before buying parts.",
+"url": "https://us.bddiesel.com/blogs/r-d-blog/6-7l-power-stroke-problems-2011-2024-10-common-issues-symptoms-real-fixes"
+},
+{
+"id": "ford-f250-2017-ref-016",
+"machine": "ford-f250-2017",
+"type": "reference",
+"title": "Bostech – 6.7 turbo problems diagnosis guide",
+"text": "Smoke-test the charge pipes and check the EBP sensor/tube before condemning the GT37 VGT turbo (P0299 underboost).",
+"url": "https://bostechauto.com/blog/67-powerstroke-turbo-problems-diagnosis-solutions-replacement-guide/"
+},
+{
+"id": "ford-f250-2017-ref-017",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: CP4.2 high-pressure fuel pump (no start, stalls, no power, P0087)",
+"text": "Change both fuel filters on schedule (Motorcraft FD-4647 kit for 2017; OM p.356-359). Drain the water separator when the water-in-fuel warning shows (OM p.342). Buy fuel at busy stations and never run it dry. P0087 low rail pressure, hard start, stalling, or metal flakes in the filter means stop and diagnose right away: shops find debris by checking the regulator and fuel rail. A disaster-prevention kit or lift-pump upgrade is optional insurance."
+},
+{
+"id": "ford-f250-2017-ref-018",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: EGR cooler (white smoke, coolant loss, P0401, overheat)",
+"text": "P0401, coolant loss with no visible leak, or white sweet-smelling exhaust smoke. Lots of idling cokes the cooler with carbon. Pressure-test the cooling system; replace the cooler (not just the valve) if it's restricted or cracked. Don't keep driving with coolant going into the intake: it can hydrolock the engine."
+},
+{
+"id": "ford-f250-2017-ref-019",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: DPF / regeneration (frequent regens, reduced power, P2463)",
+"text": "Short trips and idling load up soot. Give it a 20-30 minute highway run so an active regen can finish, or start a manual regen from the cluster menu or FORScan. P2463 (soot accumulation) or regens that keep coming back quickly means check the DPF differential pressure sensor and its tubes. Never shut off in the middle of a regen if you can avoid it."
+},
+{
+"id": "ford-f250-2017-ref-020",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: DEF / SCR warnings (countdown, 5 mph limp, P20EE, P20B9, crystals)",
+"text": "Use fresh, sealed DEF meeting ISO 22241 (Motorcraft PM-27; tank 7.4 gal). White crust at the doser means crystallization. P20B9 means the DEF tank heater circuit (check resistance and connector). P20EE means SCR efficiency, often a NOx sensor or bad or diluted DEF. The warning countdown ends in a speed limit, so fix it early (OM p.189-191, message list in Information Displays)."
+},
+{
+"id": "ford-f250-2017-ref-021",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: NOx sensors (check engine light, SCR efficiency, reduced power)",
+"text": "2017-19 trucks have two NOx sensors, NOx 1-1 before the SCR and 1-2 after it, and they aren't interchangeable. Compare NOx 1-1 vs 1-2 in FORScan before replacing. Check the wiring harness and connectors for chafing."
+},
+{
+"id": "ford-f250-2017-ref-022",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: Turbo / underboost (no power, P0299, black smoke)",
+"text": "On the GT37 VGT, underboost/P0299 is usually a leaking charge pipe or intercooler boot, or a sooty EBP sensor tube, rather than the turbo. Smoke-test the charge-air system first. Sticking vanes can often be cleared by exercising the exhaust brake on long grades."
+},
+{
+"id": "ford-f250-2017-ref-023",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: Coolant (overheating, low coolant, degas bottle)",
+"text": "The 6.7 has two cooling loops (primary high-temp 35.1 qt, secondary 15.1 qt), both Motorcraft Orange VC-3DIL-B (OM p.428-430). Test the additive level at oil changes and use Specialty Orange Coolant Revitalizer if needed. When overheating under tow, check airflow through the cooling stack, the fan, and charge-air leaks before blaming the coolant."
+},
+{
+"id": "ford-f250-2017-ref-024",
+"machine": "ford-f250-2017",
+"type": "reference-notes",
+"title": "Fix: Hard start in cold weather (won't start, gelling)",
+"text": "Use winter-blend diesel or Motorcraft Anti-Gel PM-23-A, plug in the block heater below -10°F (OM p.433), wait for the glow plug light before cranking, and check both 12V batteries (BXT-65-750)."
+}
+]
+}
