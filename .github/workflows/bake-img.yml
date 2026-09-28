@@ -1,0 +1,58 @@
+name: Bake diagram images (one-shot)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/bake-img.yml'
+      - 'data/img-stage/BATCH'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bake-img
+  cancel-in-progress: false
+
+jobs:
+  bake:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Decode staged WebP images
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          mkdir -p data/img
+          python3 - <<'PY'
+          import base64, glob, os, struct, subprocess
+          ok = bad = 0
+          for f in sorted(glob.glob('data/img-stage/*.b64')):
+              stem = os.path.basename(f)[:-4]
+              try:
+                  b = base64.b64decode(open(f).read(), validate=False)
+              except Exception as e:
+                  print('::warning::decode failed', stem, e); bad += 1; continue
+              if len(b) < 12 or b[:4] != b'RIFF' or b[8:12] != b'WEBP' or struct.unpack('<I', b[4:8])[0] + 8 != len(b):
+                  print('::warning::not a complete webp', stem, len(b)); bad += 1; continue
+              open(f'data/img/{stem}.webp', 'wb').write(b)
+              subprocess.run(['git', 'rm', '-q', f], check=True)
+              subprocess.run(['git', 'add', f'data/img/{stem}.webp'], check=True)
+              ok += 1
+          print('baked', ok, 'bad', bad, 'total webp', len(glob.glob('data/img/*.webp')))
+          PY
+      - name: Commit as bot
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -q -m "V 1.0: add diagram WebP images (baked from staging)"
+          for i in 1 2 3 4 5; do
+            if git push origin HEAD:main; then exit 0; fi
+            git pull --rebase origin main
+          done
+          exit 1
