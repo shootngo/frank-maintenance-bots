@@ -19,12 +19,6 @@
       "title": "Ryobi RYRM8002 / RYRM8021 42-inch (80V) - Operator's Manual",
       "pages": 35,
       "source": "https://556aa8d9de68ea9c4f29-0a8acad11a4df5016d26cc39a7429843.ssl.cf1.rackcdn.com/2/RYRM8002_099262002_937_OM_trilingual_06.pdf"
-    },
-    {
-      "id": "ryobi-zt-tti-ztr-guide",
-      "title": "Ryobi 80V Zero-Turn Troubleshooting Guide (TTI 2022)",
-      "pages": 56,
-      "source": "https://servicedocs.ttibrands.com.au/assets/Uploads/docs/RYOBI-80V-ZTR-Troubleshooting-Guide-2022.07.19-1.pdf"
     }
   ],
   "pageShards": [
@@ -51,10 +45,7 @@
     "pages-20.json",
     "pages-21.json",
     "pages-22.json",
-    "pages-23.json",
-    "pages-24.json",
-    "pages-25.json",
-    "pages-26.json"
+    "pages-23.json"
   ],
   "parts": "parts.json",
   "refs": "refs.json"
