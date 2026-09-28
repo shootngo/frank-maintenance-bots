@@ -19,45 +19,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { ref: main }
-      - uses: actions/setup-python@v5
-        with: { python-version: '3.13' }
-      - name: Fetch original Deere figures and compose page images
+      - name: Add image refs to page shards for committed images
         run: |
           set -euo pipefail
           git pull --ff-only origin main
-          pip install -q pillow==12.3.0
           python3 - <<'PY'
-          import json, os, io, hashlib, time, urllib.request, subprocess
-          from PIL import Image
-          slug = os.environ['SLUG']; st = f'data/machines/{slug}/staging/figs.json'; out = f'data/machines/{slug}/img'
-          spec = json.load(open(st)); os.makedirs(out, exist_ok=True); cache = {}
-          def fetch(n):
-              for i in range(5):
-                  try:
-                      b = urllib.request.urlopen(spec['base'] + n, timeout=60).read()
-                      if hashlib.md5(b).hexdigest() == spec['md5'][n]: return b
-                      print('::warning::md5 mismatch', n)
-                  except Exception as e: print('retry', n, e)
-                  time.sleep(3 * (i + 1))
-              raise SystemExit('failed ' + n)
-          for pg, names in spec['pages'].items():
-              ims = [Image.open(io.BytesIO(cache.setdefault(n, fetch(n)))).convert('L') for n in names]
-              W = max(i.width for i in ims); gap = 10
-              H = sum(i.height for i in ims) + gap * (len(ims) - 1)
-              c = Image.new('L', (W, H), 255); y = 0
-              for i in ims: c.paste(i, ((W - i.width) // 2, y)); y += i.height + gap
-              best = None
-              for s in (2, 1.5, 1):
-                  c2 = c.resize((int(W * s), int(H * s)), Image.LANCZOS) if s != 1 else c
-                  for q in (90, 85, 80, 75, 70, 65, 60):
-                      b = io.BytesIO(); c2.save(b, 'WEBP', quality=q, method=6)
-                      if b.tell() <= 40000: best = (s, q, b.getvalue()); break
-                  if best: break
-              if not best: best = (1, 60, b.getvalue())
-              p = f'{out}/{int(pg):04d}.webp'; open(p, 'wb').write(best[2])
-              print(pg, 'scale', best[0], 'q', best[1], len(best[2]), hashlib.md5(best[2]).hexdigest())
-              subprocess.run(['git', 'add', p], check=True)
-          subprocess.run(['git', 'rm', '-q', st], check=True)
+          import json, os, glob, subprocess
+          d = f"data/machines/{os.environ['SLUG']}"
+          imgs = {os.path.basename(p) for p in glob.glob(f'{d}/img/*.webp')}
+          for f in sorted(glob.glob(f'{d}/pages-*.json')):
+              s = json.load(open(f, encoding='utf-8')); ch = 0
+              for p in s:
+                  nm = f"{p['page']:04d}.webp"
+                  if nm in imgs and p.get('image') != nm: p['image'] = nm; ch += 1
+              if ch:
+                  open(f, 'w', encoding='utf-8').write(json.dumps(s, ensure_ascii=False, separators=(',', ':')))
+                  subprocess.run(['git', 'add', f], check=True); print(f, ch)
           PY
       - name: Commit as bot and push (retry on conflict)
         run: |
@@ -65,7 +42,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
-          git commit -q -m "V 1.1: ${SLUG} images v2 (40 pages, sharp, from Deere originals)"
+          git commit -q -m "V 1.1: ${SLUG} image refs in page shards"
           for i in 1 2 3 4 5; do
             if git push origin HEAD:main; then break; fi
             sleep $((i*3)); git pull --rebase origin main
