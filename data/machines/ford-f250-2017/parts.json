@@ -1,0 +1,445 @@
+{
+"version": 1,
+"parts": [
+{
+"id": "ford-f250-2017-oil-filter",
+"machine": "ford-f250-2017",
+"name": "Engine oil filter",
+"category": "filter",
+"oem": [
+{
+"number": "FL-2051S",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "Oil capacity 15.0 qt (14.2 L) including filter change (OM p.428). If Motorcraft isn't available, use a filter meeting SAE/USCAR-36.",
+"keywords": [
+"oil filter",
+"engine filter",
+"fl2051s",
+"oil change"
+]
+},
+{
+"id": "ford-f250-2017-fuel-filters",
+"machine": "ford-f250-2017",
+"name": "Fuel filters (frame-rail fuel conditioner module + engine-mounted)",
+"category": "filter",
+"oem": [
+{
+"number": "FG-1147",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [
+{
+"number": "FD-4647 (2-filter kit, PC3Z-9N184-C)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "dieselfiltersonline.com FD4647 listing & fullforcediesel.com (fits 2017+ 6.7L; supersedes FD-4641, FD-4624/FD-4625)"
+}
+],
+"notes": "The OM table prints FG-1147. Parts retailers list Motorcraft FD-4647, the 2-filter kit for 2017+ 6.7L (it replaces FD-4624/4625/4641). 2011-2016 FD-4615 does NOT fit. Confirm by VIN at the parts counter. Change both filters together. See OM p.356-359 for the procedure; max housing torque is 7 lb-ft.",
+"keywords": [
+"fuel filter",
+"water separator",
+"hfcm",
+"fuel conditioner",
+"cp4",
+"fd4647"
+]
+},
+{
+"id": "ford-f250-2017-air-filter",
+"machine": "ford-f250-2017",
+"name": "Engine air filter",
+"category": "filter",
+"oem": [
+{
+"number": "FA-1902",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "There's an air-filter restriction gauge under the hood (item A, OM p.323).",
+"keywords": [
+"air filter",
+"engine air filter",
+"fa1902"
+]
+},
+{
+"id": "ford-f250-2017-foam-prefilter",
+"machine": "ford-f250-2017",
+"name": "Air intake foam pre-filter",
+"category": "filter",
+"oem": [
+{
+"number": "FA-1909",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "",
+"keywords": [
+"pre-filter",
+"foam filter",
+"air intake"
+]
+},
+{
+"id": "ford-f250-2017-cabin-filter",
+"machine": "ford-f250-2017",
+"name": "Cabin air filter",
+"category": "filter",
+"oem": [
+{
+"number": "FP-79",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "",
+"keywords": [
+"cabin filter",
+"ac filter",
+"hvac filter"
+]
+},
+{
+"id": "ford-f250-2017-trans-filter",
+"machine": "ford-f250-2017",
+"name": "Automatic transmission filter",
+"category": "filter",
+"oem": [
+{
+"number": "FT-187",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "",
+"keywords": [
+"transmission filter",
+"trans filter"
+]
+},
+{
+"id": "ford-f250-2017-battery",
+"machine": "ford-f250-2017",
+"name": "12V battery (two required)",
+"category": "electrical",
+"oem": [
+{
+"number": "BXT-65-750",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "Dual batteries. OM p.343 covers changing the 12V battery; some features need a reset afterward.",
+"keywords": [
+"battery",
+"batteries",
+"12v"
+]
+},
+{
+"id": "ford-f250-2017-wiper",
+"machine": "ford-f250-2017",
+"name": "Windshield wiper blade",
+"category": "body",
+"oem": [
+{
+"number": "WW-2242",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.415 (PDF p.418) – Motorcraft Parts 6.7L Diesel table"
+}
+],
+"cross": [],
+"notes": "",
+"keywords": [
+"wiper",
+"wiper blade"
+]
+},
+{
+"id": "ford-f250-2017-engine-oil",
+"machine": "ford-f250-2017",
+"name": "Engine oil (diesel)",
+"category": "fluid",
+"oem": [
+{
+"number": "XO-10W30-QSD (SAE 10W-30 Super Duty Diesel)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.430 (PDF p.433)"
+},
+{
+"number": "XO-15W40-QSD (SAE 15W-40)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.430 (PDF p.433)"
+},
+{
+"number": "XO-5W40-5QSD (SAE 5W-40 full synthetic)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.430 (PDF p.433)"
+}
+],
+"cross": [],
+"notes": "Ford spec WSS-M2C171-E, API CJ-4. Use 5W-40 for severe duty and 5W-40 or 15W-40 for B20 biodiesel. Capacity is 15.0 qt with filter (OM p.428). Block heater recommended below -10°F.",
+"keywords": [
+"engine oil",
+"motor oil",
+"10w-30",
+"15w-40",
+"5w-40",
+"oil capacity"
+]
+},
+{
+"id": "ford-f250-2017-def",
+"machine": "ford-f250-2017",
+"name": "Diesel Exhaust Fluid (DEF)",
+"category": "fluid",
+"oem": [
+{
+"number": "PM-27-Gal / PM-27-Jug",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+}
+],
+"cross": [],
+"notes": "Spec WSS-M99C130-A (API-certified / ISO 22241). Tank holds 7.4 gal (28 L) on a complete vehicle (OM p.429). Fill procedure is on OM p.189-191. Keep it sealed and out of heat.",
+"keywords": [
+"def",
+"diesel exhaust fluid",
+"adblue",
+"scr",
+"urea"
+]
+},
+{
+"id": "ford-f250-2017-coolant",
+"machine": "ford-f250-2017",
+"name": "Engine coolant (primary + secondary loops)",
+"category": "fluid",
+"oem": [
+{
+"number": "VC-3DIL-B (Motorcraft Orange prediluted)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.430 (PDF p.433)"
+}
+],
+"cross": [],
+"notes": "Spec WSS-M97B44-D2 for both loops. Primary holds 35.1 qt and secondary 15.1 qt (OM p.428). Don't mix coolant types. Additive: Motorcraft Specialty Orange Engine Coolant Revitalizer.",
+"keywords": [
+"coolant",
+"antifreeze",
+"orange coolant",
+"degas bottle"
+]
+},
+{
+"id": "ford-f250-2017-atf",
+"machine": "ford-f250-2017",
+"name": "Automatic transmission fluid",
+"category": "fluid",
+"oem": [
+{
+"number": "XT-10-QLVC (MERCON LV)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.432 (PDF p.435)"
+}
+],
+"cross": [],
+"notes": "Spec WSS-M2C938-A. About 17.4 qt dry fill; a change takes less (OM p.428).",
+"keywords": [
+"transmission fluid",
+"atf",
+"mercon lv"
+]
+},
+{
+"id": "ford-f250-2017-transfer-case-fluid",
+"machine": "ford-f250-2017",
+"name": "Transfer case fluid",
+"category": "fluid",
+"oem": [
+{
+"number": "XT-10-QLVC (MERCON LV)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.432 (PDF p.435)"
+}
+],
+"cross": [],
+"notes": "1.9 qt (OM p.428).",
+"keywords": [
+"transfer case",
+"4x4 fluid"
+]
+},
+{
+"id": "ford-f250-2017-front-axle-fluid",
+"machine": "ford-f250-2017",
+"name": "Front axle lubricant",
+"category": "fluid",
+"oem": [
+{
+"number": "XY-80W90-QL (SAE 80W-90)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+}
+],
+"cross": [],
+"notes": "Spec WSP-M2C197-A. 2.7 qt (OM p.428).",
+"keywords": [
+"front axle",
+"differential",
+"gear oil"
+]
+},
+{
+"id": "ford-f250-2017-rear-axle-fluid",
+"machine": "ford-f250-2017",
+"name": "Rear axle lubricant",
+"category": "fluid",
+"oem": [
+{
+"number": "XY-75W85-QL (10.5 in axle, SAE 75W-85 synthetic)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+},
+{
+"number": "XY-75W140-QL (Dana M275/M300, SAE 75W-140)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+}
+],
+"cross": [],
+"notes": "10.5 in axle holds 3.3–3.6 qt, Dana M275 3.8 qt, Dana M300 4.5 qt. Limited-slip Ford axles need 8.8 fl oz of XL-3 friction modifier on a full refill (OM p.428). Check your axle tag. (The OM table prints XY-80W90-QL on the U.S. Dana M300 line; verify.)",
+"keywords": [
+"rear axle",
+"differential",
+"gear oil",
+"75w-140",
+"75w-85"
+]
+},
+{
+"id": "ford-f250-2017-brake-fluid",
+"machine": "ford-f250-2017",
+"name": "Brake fluid",
+"category": "fluid",
+"oem": [
+{
+"number": "PM-20 (DOT 4 LV)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+}
+],
+"cross": [],
+"notes": "Spec WSS-M6C65-A2.",
+"keywords": [
+"brake fluid",
+"dot 4"
+]
+},
+{
+"id": "ford-f250-2017-anti-gel",
+"machine": "ford-f250-2017",
+"name": "Diesel anti-gel / cetane additives",
+"category": "fluid",
+"oem": [
+{
+"number": "PM-23-A (Anti-Gel)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+},
+{
+"number": "PM-22-A (Cetane Booster)",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.431 (PDF p.434)"
+}
+],
+"cross": [],
+"notes": "The OM says extra additives shouldn't normally be needed. Anti-gel is for winter.",
+"keywords": [
+"anti-gel",
+"fuel additive",
+"cetane",
+"gelling"
+]
+},
+{
+"id": "ford-f250-2017-spindle-grease",
+"machine": "ford-f250-2017",
+"name": "Front spindle/wheel bearing grease (4x4)",
+"category": "fluid",
+"oem": [
+{
+"number": "XG-11",
+"brand": "Motorcraft",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.432 (PDF p.435)"
+}
+],
+"cross": [],
+"notes": "Spec WSS-M2C192-A.",
+"keywords": [
+"grease",
+"wheel bearing",
+"spindle"
+]
+},
+{
+"id": "ford-f250-2017-lug-nuts",
+"machine": "ford-f250-2017",
+"name": "Wheel lug nut torque",
+"category": "spec",
+"oem": [
+{
+"number": "165 lb-ft (224 Nm), M14 x 1.5",
+"brand": "Ford spec",
+"confidence": "verify",
+"source": "2017 Super Duty Owner's Manual p.409 (PDF p.412)"
+}
+],
+"cross": [],
+"notes": "Tighten in the star sequence (OM p.407). Re-torque after the first 100 miles and after any wheel service.",
+"keywords": [
+"lug nut",
+"torque",
+"wheel",
+"tire change"
+]
+}
+]
+}
