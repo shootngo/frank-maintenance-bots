@@ -1,9 +1,38 @@
 {
   "slug": "ryobi-zt",
   "name": "Ryobi Zero-Turn",
-  "status": "soon",
-  "manuals": [],
-  "pageShards": [],
+  "manuals": [
+    {
+      "id": "ryobi-zt-ry48ztr100-om",
+      "title": "Ryobi RY48ZTR100 42-inch (48V) - Operator's Manual",
+      "pages": 36,
+      "source": "https://556aa8d9de68ea9c4f29-0a8acad11a4df5016d26cc39a7429843.ssl.cf1.rackcdn.com/2/RY48ZTR75_100_099749015_016_715_OM_trilingual_10.pdf"
+    },
+    {
+      "id": "ryobi-zt-ryrm8003-om",
+      "title": "Ryobi RYRM8003 54-inch (80V) - Operator's Manual",
+      "pages": 33,
+      "source": "https://images.thdstatic.com/catalog/pdfImages/5c/5c99253e-b7cb-429d-a2bd-d7671f733928.pdf"
+    }
+  ],
+  "pageShards": [
+    "pages-00.json",
+    "pages-01.json",
+    "pages-02.json",
+    "pages-03.json",
+    "pages-04.json",
+    "pages-05.json",
+    "pages-06.json",
+    "pages-07.json",
+    "pages-08.json",
+    "pages-09.json",
+    "pages-10.json",
+    "pages-11.json",
+    "pages-12.json",
+    "pages-13.json",
+    "pages-14.json",
+    "pages-15.json"
+  ],
   "parts": "parts.json",
   "refs": "refs.json"
 }
