@@ -24,5 +24,6 @@
     "pages-11.json"
   ],
   "parts": "parts.json",
-  "refs": "refs.json"
+  "refs": "refs.json",
+  "images": 40
 }
