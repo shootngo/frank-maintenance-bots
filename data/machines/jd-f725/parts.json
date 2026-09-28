@@ -1,0 +1,288 @@
+{
+ "parts": [
+  {
+   "id": "jd-f725-air-filter-paper",
+   "machine": "jd-f725",
+   "name": "Air cleaner element, paper (primary)",
+   "category": "filter",
+   "oem": [
+    {
+     "number": "M76076",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Service procedure p.57. Numbers may be superseded, so confirm with the dealer using your serial.",
+   "keywords": [
+    "air filter",
+    "air cleaner",
+    "paper element",
+    "filter"
+   ]
+  },
+  {
+   "id": "jd-f725-air-filter-foam",
+   "machine": "jd-f725",
+   "name": "Air cleaner element, foam (pre-cleaner)",
+   "category": "filter",
+   "oem": [
+    {
+     "number": "M76077",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Clean the foam per p.57.",
+   "keywords": [
+    "air filter",
+    "foam element",
+    "pre-cleaner",
+    "filter"
+   ]
+  },
+  {
+   "id": "jd-f725-fuel-filter",
+   "machine": "jd-f725",
+   "name": "Fuel filter",
+   "category": "filter",
+   "oem": [
+    {
+     "number": "AM116304",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Replacement procedure p.59.",
+   "keywords": [
+    "fuel filter",
+    "filter",
+    "gas filter"
+   ]
+  },
+  {
+   "id": "jd-f725-oil-filter",
+   "machine": "jd-f725",
+   "name": "Engine oil filter",
+   "category": "filter",
+   "oem": [
+    {
+     "number": "AM107423",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Oil and filter change p.55.",
+   "keywords": [
+    "oil filter",
+    "engine filter",
+    "filter"
+   ]
+  },
+  {
+   "id": "jd-f725-hyd-inline-filter",
+   "machine": "jd-f725",
+   "name": "In-line hydraulic filter",
+   "category": "filter",
+   "oem": [
+    {
+     "number": "AM103181",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Change procedure p.68.",
+   "keywords": [
+    "hydraulic filter",
+    "in-line filter",
+    "filter"
+   ]
+  },
+  {
+   "id": "jd-f725-trans-filter",
+   "machine": "jd-f725",
+   "name": "Transmission (hydrostatic) oil filter",
+   "category": "filter",
+   "oem": [
+    {
+     "number": "AM103027",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Transmission oil change p.69. Manual recommends John Deere HY-GARD.",
+   "keywords": [
+    "transmission filter",
+    "hydro filter",
+    "hydrostatic",
+    "filter"
+   ]
+  },
+  {
+   "id": "jd-f725-spark-plug",
+   "machine": "jd-f725",
+   "name": "Spark plug (x2, V-twin)",
+   "category": "ignition",
+   "oem": [
+    {
+     "number": "M71939",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Gap 0.64 mm (0.025 in.), per p.59. Use resistor plugs in Canada.",
+   "keywords": [
+    "spark plug",
+    "plug",
+    "ignition"
+   ]
+  },
+  {
+   "id": "jd-f725-trans-belt",
+   "machine": "jd-f725",
+   "name": "Transmission (hydro drive) belt",
+   "category": "belt",
+   "oem": [
+    {
+     "number": "M75353",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Replacement procedure p.70.",
+   "keywords": [
+    "transmission belt",
+    "drive belt",
+    "hydro belt",
+    "belt"
+   ]
+  },
+  {
+   "id": "jd-f725-pto-belts",
+   "machine": "jd-f725",
+   "name": "PTO belts (set of 2; always replace both)",
+   "category": "belt",
+   "oem": [
+    {
+     "number": "AM108054",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Qty 2. Tension nut until belt deflects 19 mm (3/4 in.) at mid-span on the longest side (p.78–79).",
+   "keywords": [
+    "pto belt",
+    "pto belts",
+    "belt",
+    "deck drive belt"
+   ]
+  },
+  {
+   "id": "jd-f725-deck-belt-48",
+   "machine": "jd-f725",
+   "name": "Mower deck belt, 48-inch deck",
+   "category": "belt",
+   "oem": [
+    {
+     "number": "M111564",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Removal/installation and routing picture p.84–86.",
+   "keywords": [
+    "deck belt",
+    "mower belt",
+    "48 inch",
+    "48\"",
+    "belt"
+   ]
+  },
+  {
+   "id": "jd-f725-deck-belt-54",
+   "machine": "jd-f725",
+   "name": "Mower deck belt, 54-inch deck",
+   "category": "belt",
+   "oem": [
+    {
+     "number": "M111534",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Removal/installation and routing picture p.84–86.",
+   "keywords": [
+    "deck belt",
+    "mower belt",
+    "54 inch",
+    "54\"",
+    "belt"
+   ]
+  },
+  {
+   "id": "jd-f725-blade-48",
+   "machine": "jd-f725",
+   "name": "Mower blade, 48-inch deck",
+   "category": "blade",
+   "oem": [
+    {
+     "number": "M115495",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Check/sharpen/balance p.86–88; keep original bevel.",
+   "keywords": [
+    "blade",
+    "blades",
+    "mower blade",
+    "48 inch"
+   ]
+  },
+  {
+   "id": "jd-f725-blade-54",
+   "machine": "jd-f725",
+   "name": "Mower blade, 54-inch deck",
+   "category": "blade",
+   "oem": [
+    {
+     "number": "M115496",
+     "brand": "John Deere",
+     "confidence": "verify",
+     "source": "Operator's Manual OMM134807 A9 p.46 (Replacement Parts)"
+    }
+   ],
+   "cross": [],
+   "notes": "Check/sharpen/balance p.86–88; keep original bevel.",
+   "keywords": [
+    "blade",
+    "blades",
+    "mower blade",
+    "54 inch"
+   ]
+  }
+ ]
+}
