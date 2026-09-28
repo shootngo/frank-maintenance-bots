@@ -1,0 +1,11 @@
+/* V 1.1: service log */
+.sheet.log { max-height: 88vh; overflow-y: auto; }
+.sheet select, .sheet textarea { width: 100%; box-sizing: border-box; font: inherit; padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18); background: rgba(0,0,0,.25); color: inherit; margin-bottom: 8px; }
+.sheet input[type=file] { margin-bottom: 8px; }
+.sl-list { margin: 10px 0; display: flex; flex-direction: column; gap: 8px; }
+.sl-entry { border: 1px solid rgba(255,255,255,.14); border-radius: 12px; padding: 10px; }
+.sl-head { margin-bottom: 4px; }
+.sl-photo { padding: 0; border: 0; background: none; margin-top: 6px; }
+.sl-photo img { max-width: 120px; max-height: 90px; border-radius: 8px; display: block; }
+.sl-actions { display: flex; gap: 8px; margin-top: 6px; }
+.sl-actions button { padding: 4px 10px; border-radius: 8px; }

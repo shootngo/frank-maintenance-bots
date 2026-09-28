@@ -1,15 +1,19 @@
 /* Frank's Maintenance Bots service worker */
-const CACHE = 'fmb-v1.0';
+const CACHE = 'fmb-v1.1';
 const SHELL = [
   './',
   './index.html',
   './css/app.css',
+  './css/servicelog.css',
   './js/ui.js',
   './js/app.js',
   './js/search.js',
   './js/parts.js',
   './js/symptoms.js',
   './js/gemini.js',
+  './js/machines.js',
+  './js/servicelog.js',
+  './data/machines.json',
   './manifest.webmanifest',
   './data/parts.json',
   './data/index.json',
