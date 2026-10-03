@@ -1,0 +1,290 @@
+name: Render hi-res diagrams V 1.2 (one-shot)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/render-hires.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: render-hires
+  cancel-in-progress: false
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - name: Tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils fonts-croscore fonts-liberation >/dev/null
+          python3 -m pip install -q --break-system-packages pillow==12.3.0
+          google-chrome --version; fc-match Arial
+      - name: Download official source PDFs and check md5 against the local copies
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pdf && cd /tmp/pdf
+          dl() { curl -fsSL --retry 4 -o "$1.pdf" "$3"; echo "$2  $1.pdf" | md5sum -c; }
+          dl mfop    844544c7b1f2ffcf82eb3c9b4bc51cda "https://pub-3165399892d74dde978be565a4d4aea8.r2.dev/manuals/massey-ferguson/MasseyFerguson135_manueloperateur_1974.pdf"
+          dl perkins e91a0eb8ea5ccd71ab8418cf5bac3a55 "https://archive.org/download/workshop-manual-for-3.152-series-diesel-engines-3.152-d-3.152-3.1522-3.1524-t-3./Workshop%20manual%20for%203.152%20series%20diesel%20engines%203.152%20D3.152%203.1522%203.1524%20T3.1524%20and%20D3.152M%2C%203HD46%20marine%20engines.pdf"
+          dl mfsvc   6f836aa6b3ad150b77953d8350f57fa6 "https://archive.org/download/tractors-mf135_mf150_mf165_shop_service/mf135_mf150_mf165_shop_service.pdf"
+          dl ford    b9b30cb34eef3db430b72aee9b8b1498 "https://www.fordservicecontent.com/Ford_Content/Catalog/owner_information/2017-Super-Duty-Owners-Manual-version-1_om_EN-US_06_2016.pdf"
+          dl subaru  82ceeebb75e4ae49de9d54ff7589d122 "https://cdn.dealereprocess.org/cdn/servicemanuals/subaru/2020-forester.pdf"
+          dl ry48    11b2b25fe06370a996c70c0238216bcf "https://556aa8d9de68ea9c4f29-0a8acad11a4df5016d26cc39a7429843.ssl.cf1.rackcdn.com/2/RY48ZTR75_100_099749015_016_715_OM_trilingual_10.pdf"
+          dl rm8003  446fca6e09d09646eac27bb85171c673 "https://images.thdstatic.com/catalog/pdfImages/5c/5c99253e-b7cb-429d-a2bd-d7671f733928.pdf"
+          dl rm8002  8ee100ee95127f8ee84098de505cc26f "https://556aa8d9de68ea9c4f29-0a8acad11a4df5016d26cc39a7429843.ssl.cf1.rackcdn.com/2/RYRM8002_099262002_937_OM_trilingual_06.pdf"
+          ls -la
+      - name: Rebuild JD F725 manual from Deere's public HTML viewer and print it
+        run: |
+          set -euo pipefail
+          cat > /tmp/build_jd.py <<'PY'
+          #!/usr/bin/env python3
+          """Rebuild the JD F725 manual PDF from Deere's public HTML viewer exactly as the local copy was made."""
+          import hashlib, re, subprocess, sys, urllib.request, concurrent.futures as cf, os
+          B = 'http://manuals.deere.com/cceomview/OMM134807_A9/Output/'
+          OUT = sys.argv[1]; os.makedirs(OUT + '/images', exist_ok=True)
+          PAGES = ['Index.html'] + ['OMM134807_A9%d.html' % i for i in range(3, 27)]
+          def get(u):
+              for k in range(4):
+                  try: return urllib.request.urlopen(u, timeout=60).read()
+                  except Exception as e:
+                      if getattr(e, 'code', 0) == 404: return None
+              return None
+          HEAD = ('<!DOCTYPE html>\n<html>\n<head>\n<meta charset="utf-8">\n<title>John Deere F725 Front Mower - Operator\'s Manual OMM134807 Issue A9</title>\n'
+            '<link rel="stylesheet" href="document.css">\n<style>\n  @page { size: letter; margin: 0.5in; }\n  body { background: white; }\n'
+            '  /* Hide typical Deere nav chrome if present */\n  .nav, .navigation, #nav, #tocnav { display: none !important; }\n'
+            '  img { max-width: 100%; height: auto; }\n  section.manual-page { break-inside: avoid-page; }\n</style>\n</head>\n<body>\n'
+            '<header style="margin-bottom:1em;">\n  <h1>John Deere F725 Front Mower</h1>\n'
+            '  <p>Operator\'s Manual OMM134807 Issue A9 \u2014 Front Mowers PIN (090001- )</p>\n'
+            '  <p>Source: http://manuals.deere.com/cceomview/OMM134807_A9/Output/Index.html</p>\n  <hr>\n</header>\n')
+          out = HEAD
+          for i, p in enumerate(PAGES):
+              raw = get(B + p).decode('utf-8', errors='ignore').replace('\r\n', '\n')
+              body = re.search(r'<body[^>]*>(.*)</body>', raw, re.S | re.I).group(1)
+              out += '<section class="manual-page" style="%s">\n' % ('' if i == 0 else 'page-break-before: always;') + body + '\n</section>'
+          out += '\n</body>\n</html>\n'
+          md5 = hashlib.md5(out.encode()).hexdigest(); print('combined.html md5', md5)
+          assert md5 == '30e8ee3e5cb9eb520d943e140e895d34', 'combined.html differs from the local copy'
+          open(OUT + '/combined.html', 'w', encoding='utf-8').write(out)
+          css = get(B + 'document.css'); assert hashlib.md5(css).hexdigest() == 'ad454a835b6b5f4dde455ed6f1ca0585'
+          open(OUT + '/document.css', 'wb').write(css)
+          names = sorted(set(re.findall(r'src="images/([^"]+)"', out)))
+          res = dict(cf.ThreadPoolExecutor(8).map(lambda n: (n, get(B + 'images/' + n)), names))
+          h = hashlib.md5()
+          for n in names:
+              if res[n] is None: print('unavailable (also missing locally):', n); continue
+              open(OUT + '/images/' + n, 'wb').write(res[n])
+              h.update((hashlib.md5(res[n]).hexdigest() + '  ' + n + '\n').encode())
+          print('images md5', h.hexdigest()); assert h.hexdigest() == 'a21519fd958ed9ba8db2eb5eb326ccdc', 'Deere images differ'
+          PY
+          python3 /tmp/build_jd.py /tmp/jd
+          cd /tmp/jd
+          google-chrome --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer --print-to-pdf=/tmp/pdf/jd.pdf file:///tmp/jd/combined.html
+          pdfinfo /tmp/pdf/jd.pdf | grep Pages
+          t=$(pdftotext -layout /tmp/pdf/jd.pdf - | md5sum | cut -d' ' -f1)
+          if [ "$t" = 1f1056c21e03a3e1cdab4a9c239bdb15 ]; then echo "JD text identical to local PDF"; else echo "::notice::JD pagination differs from local PDF; renderer remaps pages by text"; echo "JD_REMAP=1" >> "$GITHUB_ENV"; fi
+      - name: Render full (>=200 DPI) + 400px thumbs, point shards at them
+        run: |
+          set -euo pipefail
+          git pull --ff-only origin main
+          cat > /tmp/render_hires.py <<'PY'
+          #!/usr/bin/env python3
+          """V 1.2 hi-res diagram renderer (runs inside the one-time GitHub Actions job).
+          For every page with an `image` in the shards: render the source PDF page at >=200 DPI in grayscale,
+          trim blank margins / printer marks, save ~1700px wide -> img/full/<stem>.webp|png, rebuild a 400px
+          thumbnail -> img/<stem>.webp, add "full" to the shard page, and write img/full/index.json.
+          Usage: render_hires.py PDFDIR [slug ...]   (env JD_REMAP=1 -> confirm JD pages by text overlap)"""
+          import glob, io, json, os, re, subprocess, sys, tempfile
+          from multiprocessing import Pool
+          from PIL import Image, ImageChops, ImageFilter, ImageOps
+
+          PDFDIR = sys.argv[1]
+          ONLY = set(sys.argv[2:])
+          M = {
+            'mf-135': dict(shards='data/pages-*.json', img='data/img', legacy=True,
+                           src={'massey-ferguson-135-operator-s-manual': 'mfop', 'perkins-ad3-152-workshop-manual': 'perkins',
+                                'massey-ferguson-135-service-manual': 'mfsvc'}),
+            'jd-f725': dict(src={'': 'jd'}),
+            'ford-f250-2017': dict(src={'': 'ford'}),
+            'subaru-forester-2020': dict(src={'': 'subaru'}),
+            'ryobi-zt': dict(src={'ry48': 'ry48', 'rm8003': 'rm8003', 'rm8002': 'rm8002'}),
+          }
+          SCANS = {'mfop', 'perkins', 'mfsvc'}                       # photographed/scanned pages: no auto-trim
+          PRECROP = {'subaru': (0.07, 0.10, 0.93, 0.875)}             # drop printer crop marks / job slug
+          TARGET_W, MAX_W, MIN_DPI, THUMB_W = 1700, 2000, 200, 400
+
+          def pdfinfo_page(pdf, n):
+              out = subprocess.run(['pdfinfo', '-f', str(n), '-l', str(n), pdf], capture_output=True, text=True).stdout
+              m = re.search(r'Page\s+%d size:\s+([\d.]+) x ([\d.]+)' % n, out)
+              r = re.search(r'Page\s+%d rot:\s+(\d+)' % n, out)
+              w, h = float(m.group(1)), float(m.group(2))
+              if r and int(r.group(1)) % 180: w, h = h, w
+              return w / 72.0, h / 72.0
+
+          def pdftoppm(pdf, n, dpi):
+              with tempfile.TemporaryDirectory() as td:
+                  subprocess.run(['pdftoppm', '-f', str(n), '-l', str(n), '-r', str(dpi), '-gray', '-png', pdf, td + '/p'], check=True)
+                  return Image.open(glob.glob(td + '/p*.png')[0]).convert('L')
+
+          def content_box(im, key):
+              """Fractional crop box of the page content (ignores a 3% edge band where printer marks live)."""
+              W, H = im.size
+              x0, y0, x1, y1 = PRECROP.get(key, (0, 0, 1, 1))
+              if key in SCANS: return (x0, y0, x1, y1)
+              if key == 'jd':                     # skip Deere's grey table-of-contents sidebar column
+                  px = im.load(); side = 0
+                  for x in range(int(W * 0.5)):
+                      g = sum(1 for y in range(0, H, 3) if 150 <= px[x, y] <= 235) / float(len(range(0, H, 3)))
+                      if g > 0.75: side = x
+                      elif side and x - side > 3: break
+                  if side: x0 = max(x0, (side + 2) / float(W))
+              bx0, by0, bx1, by1 = int(W * max(x0, .03)), int(H * max(y0, .03)), int(W * min(x1, .97)), int(H * min(y1, .97))
+              ink = ImageOps.invert(im.crop((bx0, by0, bx1, by1))).point(lambda v: 255 if v > 40 else 0)
+              bb = ink.getbbox()
+              if not bb: return (x0, y0, x1, y1)
+              pad = 0.015
+              return (max(x0, (bx0 + bb[0]) / W - pad), max(y0, (by0 + bb[1]) / H - pad),
+                      min(x1, (bx0 + bb[2]) / W + pad), min(y1, (by0 + bb[3]) / H + pad))
+
+          def render(pdf, key, n):
+              win, hin = pdfinfo_page(pdf, n)
+              probe = pdftoppm(pdf, n, 60)
+              box = content_box(probe, key)
+              cw_in = win * (box[2] - box[0])
+              dpi = max(MIN_DPI, min(600, int(TARGET_W / cw_in + 0.999)))
+              im = pdftoppm(pdf, n, dpi)
+              W, H = im.size
+              im = im.crop((int(W * box[0]), int(H * box[1]), int(W * box[2]), int(H * box[3])))
+              if im.width > MAX_W:
+                  im = im.resize((MAX_W, round(im.height * MAX_W / im.width)), Image.LANCZOS)
+              # whiten paper / deepen ink on scans (no-op on clean vector pages)
+              h = im.histogram(); tot = sum(h); acc = 0; lo = 0; hi = 255
+              for i in range(256):
+                  acc += h[i]
+                  if acc <= tot * 0.005: lo = i
+                  if acc >= tot * 0.60: hi = i; break
+              if hi < 250 and hi - lo > 60:
+                  s = 255.0 / (hi - lo); im = im.point(lambda x, lo=lo, s=s: max(0, min(255, int((x - lo) * s))))
+              return im, dpi
+
+          def smooth_tones(im):
+              """Share of pixels in smooth mid-tone gradients (photos/shading) that would band at 16 grey levels."""
+              sm = im.reduce(4)
+              rng = ImageChops.subtract(sm.filter(ImageFilter.MaxFilter(3)), sm.filter(ImageFilter.MinFilter(3)))
+              a, r = sm.tobytes(), rng.tobytes()
+              return sum(1 for i in range(len(a)) if 40 < a[i] < 216 and 2 <= r[i] <= 40) / float(len(a))
+
+          def encode_full(im):
+              b = io.BytesIO(); im.save(b, 'WEBP', quality=82, method=6); webp = b.getvalue()
+              if smooth_tones(im) < 0.012:        # line art: lossless 16-grey PNG if it is also smaller
+                  q = im.point(lambda x: (x // 17) * 17).convert('P', palette=Image.ADAPTIVE, colors=16)
+                  b = io.BytesIO(); q.save(b, 'PNG', optimize=True, bits=4); png = b.getvalue()
+                  if len(png) <= len(webp): return 'png', png
+              return 'webp', webp
+
+          def thumb(im):
+              t = im.resize((THUMB_W, round(im.height * THUMB_W / im.width)), Image.LANCZOS) if im.width > THUMB_W else im
+              b = io.BytesIO(); t.save(b, 'WEBP', quality=78, method=6); return b.getvalue()
+
+          def words(s): return set(re.findall(r'[a-z0-9]{3,}', (s or '').lower()))
+
+          def best_page(pdf, n, text, npages):
+              want = words(text)
+              if not want: return n
+              best = (-1, n)
+              for k in range(max(1, n - 3), min(npages, n + 3) + 1):
+                  got = words(subprocess.run(['pdftotext', '-f', str(k), '-l', str(k), pdf, '-'], capture_output=True, text=True).stdout)
+                  sc = len(want & got) / float(len(want)) - 0.02 * abs(k - n)
+                  if sc > best[0]: best = (sc, k)
+              return best[1]
+
+          def job(a):
+              slug, stem, key, n, text, imgdir = a
+              pdf = os.path.join(PDFDIR, key + '.pdf')
+              if slug == 'jd-f725' and os.environ.get('JD_REMAP') == '1':
+                  npg = int(re.search(r'Pages:\s+(\d+)', subprocess.run(['pdfinfo', pdf], capture_output=True, text=True).stdout).group(1))
+                  n2 = best_page(pdf, n, text, npg)
+                  if n2 != n: print('::notice::jd page remap', n, '->', n2, flush=True)
+                  n = n2
+              im, dpi = render(pdf, key, n)
+              ext, blob = encode_full(im)
+              fulldir = imgdir + '/full'
+              for e in ('webp', 'png'):
+                  old = '%s/%s.%s' % (fulldir, stem, e)
+                  if e != ext and os.path.exists(old): os.remove(old)
+              open('%s/%s.%s' % (fulldir, stem, ext), 'wb').write(blob)
+              tpath = '%s/%s.webp' % (imgdir, stem)
+              src_t = im
+              if slug == 'jd-f725' and os.path.exists(tpath):
+                  src_t = Image.open(tpath).convert('L')       # keep the Deere figure composite as the JD thumb
+              tb = thumb(src_t); open(tpath, 'wb').write(tb)
+              print(slug, stem, 'p%d' % n, '%ddpi' % dpi, '%dx%d' % im.size, ext, len(blob), flush=True)
+              return slug, stem, ['full/%s.%s' % (stem, ext), len(blob), im.width, im.height, len(tb)]
+
+          if __name__ == '__main__':
+              jobs, plan = [], {}
+              for slug, cfg in M.items():
+                  if ONLY and slug not in ONLY: continue
+                  base = 'data/machines/%s/' % slug
+                  imgdir = cfg.get('img', base + 'img'); os.makedirs(imgdir + '/full', exist_ok=True)
+                  shards = sorted(glob.glob(cfg.get('shards', base + 'pages-*.json')))
+                  plan[slug] = (cfg, imgdir, shards); seen = set()
+                  for sf in shards:
+                      data = json.load(open(sf, encoding='utf-8'))
+                      for p in (data if isinstance(data, list) else data.get('pages', [])):
+                          img = p.get('image')
+                          if not img: continue
+                          stem = os.path.splitext(os.path.basename(img))[0]
+                          if stem in seen: continue
+                          seen.add(stem)
+                          k = next(k for k in sorted(cfg['src'], key=len, reverse=True) if stem.startswith(k))
+                          jobs.append((slug, stem, cfg['src'][k], int(re.search(r'(\d+)$', stem).group(1)), p.get('text', ''), imgdir))
+              with Pool(max(1, os.cpu_count() or 2)) as pool:
+                  res = pool.map(job, jobs, chunksize=1)
+              out = {}
+              for slug, stem, f in res: out.setdefault(slug, {})[stem] = f
+              summary = {}
+              for slug, (cfg, imgdir, shards) in plan.items():
+                  got = out.get(slug, {})
+                  for sf in shards:
+                      raw = open(sf, encoding='utf-8').read(); data = json.loads(raw); changed = False
+                      for p in (data if isinstance(data, list) else data.get('pages', [])):
+                          if not p.get('image'): continue
+                          stem = os.path.splitext(os.path.basename(p['image']))[0]
+                          full = ('data/img/' if cfg.get('legacy') else '') + got[stem][0]
+                          if p.get('full') != full: p['full'] = full; changed = True
+                      if changed:
+                          pretty = raw.lstrip().startswith('[\n') or raw.lstrip().startswith('{\n')
+                          txt = json.dumps(data, ensure_ascii=False, indent=1 if pretty else None, separators=None if pretty else (',', ':'))
+                          open(sf, 'w', encoding='utf-8').write(txt)
+                  files = [got[k] for k in sorted(got)]
+                  tb = sum(f[1] for f in files)
+                  json.dump({'v': 1, 'slug': slug, 'count': len(files), 'bytes': tb, 'thumbBytes': sum(f[4] for f in files), 'files': files},
+                            open(imgdir + '/full/index.json', 'w'), separators=(',', ':'))
+                  summary[slug] = [len(files), tb]
+              print('SUMMARY', json.dumps(summary))
+          PY
+          python3 -u /tmp/render_hires.py /tmp/pdf
+          if git ls-files | grep -i 'tti-'; then echo "::error::TTI files present"; exit 1; fi
+          git add -A data
+          git status --short | wc -l
+      - name: Commit as bot and push (retry on conflict)
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -q -m "V 1.2: hi-res diagrams (full >=200 DPI + 400px thumbs) rendered from official sources"
+          for i in 1 2 3 4 5; do
+            if git push origin HEAD:main; then break; fi
+            sleep $((i*3)); git pull --rebase origin main
+            [ "$i" = 5 ] && exit 1
+          done
+      - name: Deploy Pages
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: gh workflow run pages.yml --ref main || true
