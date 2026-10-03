@@ -55,6 +55,7 @@
         pages.concat(refs).forEach(function (pg) {
           pg.machine = m.slug;
           if (pg.image) pg.image = resolveImg(base, pg.image);
+          if (pg.full) pg.full = resolveImg(base, pg.full);
           if (!pg.type) pg.type = 'manual-page';
         });
         refs.forEach(function (pg) { if (String(pg.type).indexOf('reference') !== 0) pg.type = 'reference'; });

@@ -14,8 +14,10 @@
     var imgs = (pages || []).filter(function (p) { return p && p.image; }).slice(0, 6);
     if (!imgs.length) return '';
     return '<div class="thumbs">' + imgs.map(function (p) {
-      return '<button type="button" data-lb="' + esc(p.image) + '" title="' + esc(p.title || '') + '">' +
-        '<img src="' + esc(p.image) + '" alt=""></button>';
+      var lbl = w.FMBViewer ? w.FMBViewer.labelFor(p) : (p.title || '');
+      return '<button type="button" data-lb="' + esc(p.image) + '"' + (p.full ? ' data-full="' + esc(p.full) + '"' : '') +
+        ' data-label="' + esc(lbl) + '" title="' + esc(lbl) + '" aria-label="Open ' + esc(lbl) + ' full screen">' +
+        '<img src="' + esc(p.image) + '" alt="" loading="lazy" decoding="async"></button>';
     }).join('') + '</div>';
   }
   function sourceChips(pages, grounded) {
