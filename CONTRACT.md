@@ -1,4 +1,4 @@
-# Frank's Maintenance Bots: per-machine data contract (V 1.1)
+# Frank's Maintenance Bots: per-machine data contract (V 1.2)
 
 Live app: https://shootngo.github.io/frank-maintenance-bots/
 Repo: `shootngo/frank-maintenance-bots`, branch `main`. Pages deploys via `.github/workflows/pages.yml` on every push to `main` (and on `workflow_dispatch`).
@@ -8,7 +8,7 @@ Repo: `shootngo/frank-maintenance-bots`, branch `main`. Pages deploys via `.gith
 1. **Only add or modify files under `data/machines/<slug>/`** (plus your own one-time workflow `.github/workflows/materialize-<slug>.yml`, which you must delete when you're done).
 2. **Never edit shared files**: `index.html`, `js/*`, `css/*`, `sw.js`, `data/machines.json`, `data/index.json`, `data/pages-NN.json`, `data/parts.json`, `data/img/*`, `.github/workflows/pages.yml`, `CONTRACT.md`. The integrator owns these.
 3. MF 135 is the legacy machine. Its data stays at `data/index.json`, `data/pages-NN.json` and `data/img/`. Don't touch it.
-4. Keep every JSON file **under 15 KB** (shard the pages). Each image should be ≤ ~15 KB WebP.
+4. Keep every JSON file **under 15 KB** (shard the pages). Thumbnails should be ≤ ~15 KB WebP. Full images can be larger (~100–400 KB), so render them in a runner (see §8) and never push them through the MCP.
 5. Push small commits. Each commit has to stand on its own, so a partial success still leaves the site working.
 
 ## 1. Slugs (registry = `data/machines.json`, integrator-owned)
@@ -30,7 +30,9 @@ data/machines/<slug>/
   pages-01.json ...
   parts.json           # optional
   refs.json            # optional (community / forum / reference notes)
-  img/0012.webp ...    # diagram images, referenced by page.image
+  img/0012.webp ...    # ~400px THUMBNAILS, referenced by page.image
+  img/full/0012.webp   # FULL images (>=200 DPI, ~1600-2000px, grayscale WebP q80+ or PNG), page.full
+  img/full/index.json  # offline-pack list: {v, slug, count, bytes, thumbBytes, files:[[path,bytes,w,h,thumbBytes]]}
   staging/             # TEMPORARY base64 chunks for binaries; must be empty/deleted at the end
 ```
 
@@ -83,6 +85,7 @@ A JSON **array** (an `{"pages": [...]}` wrapper also works):
 - `machine` must equal the slug. The app forces it anyway.
 - `type`: `manual-page` for manual pages.
 - `image`: optional, and **relative to `data/machines/<slug>/img/`**. So `"0042.webp"` resolves to `data/machines/<slug>/img/0042.webp`. (`"img/0042.webp"` also works.) Omit `image` if there's no diagram. Never reference an image that isn't committed yet, because that shows a broken thumbnail and a 404.
+- `full`: required whenever `image` is set (V 1.2). Resolved the same way as `image` (`"full/0042.webp"` gives `data/machines/<slug>/img/full/0042.webp`; MF 135 uses `data/img/full/...`). It is rendered from the official PDF at 200 DPI or more, about 1600-2000px wide. The fullscreen viewer loads only `full` and never stretches the thumbnail. Add every new full image to `img/full/index.json` so Settings > Download all diagrams for offline includes it.
 - `isDiagram: true` gets a boost for "diagram / belt routing / where is…" questions.
 
 ## 5. `parts.json`
@@ -111,11 +114,13 @@ A JSON **array** (an `{"pages": [...]}` wrapper also works):
 
 ## 7. Pushing text files
 
-Use the GitHub MCP (`create_or_update_file` or `push_files`) with owner `shootngo`, repo `frank-maintenance-bots`, branch `main`. Commit message: `V 1.1: <slug> <what>`.
+Use the GitHub MCP (`create_or_update_file` or `push_files`) with owner `shootngo`, repo `frank-maintenance-bots`, branch `main`. Commit message: `V 1.2: <slug> <what>`.
 - To update an existing file you need its current blob `sha`. Get it from `get_file_contents` or from the previous call's response.
 - Verify a push by comparing the returned blob `sha` with `git hash-object <localfile>`.
 
 ## 8. Pushing binaries (WebP) with a one-time workflow
+
+**Preferred for diagrams (V 1.2):** don't push binaries at all. Instead, use a one-time workflow that downloads the official public PDF inside the runner, checks its md5 against your local copy, renders the pages (full image plus 400px thumbnail), commits them as github-actions[bot], dispatches `pages.yml`, and is then deleted. The base64 staging below is only for small images that have no public source.
 
 The MCP only carries text, so binaries go through base64 staging plus a one-time workflow **named uniquely per slug**.
 
@@ -206,5 +211,5 @@ The Service Log has no reminders, schedules or "due" logic. Nestor handles those
 ## 10. Definition of done for a machine
 
 - `manifest.json` is live with non-empty `pageShards`, and the chip is selectable on the live site.
-- Every `image` referenced in the shards returns 200. The live page loads with no 404s and no console errors.
+- Every `image` and `full` referenced in the shards returns 200, and the full image is legible when zoomed on a phone. The live page loads with no 404s and no console errors.
 - No `staging/*.b64` files and no `materialize-<slug>.yml` remain in the repo. The last pages.yml run succeeded.
