@@ -1,13 +1,13 @@
-/* Frank's Maintenance Bots, V 1.1 (multi-machine + Service Log) */
+/* Frank's Maintenance Bots, V 1.2 (multi-machine + Service Log + sharp diagrams) */
 (function () {
   'use strict';
-  var VERSION = window.FMB_VERSION || 'V 1.1';
+  var VERSION = window.FMB_VERSION || 'V 1.2';
   var UI = window.FMBUI;
   var $ = function (id) { return document.getElementById(id); };
   var el = {
     chat: $('chat'), q: $('q'), btnSend: $('btnSend'), btnMic: $('btnMic'), btnMenu: $('btnMenu'),
     menu: $('menu'), machineRow: $('machineRow'), btnSymptom: $('btnSymptom'), btnParts: $('btnParts'),
-    overlay: $('overlay'), lightbox: $('lightbox'), lbImg: $('lbImg'), lbClose: $('lbClose'), headerSub: $('headerSub')
+    overlay: $('overlay'), headerSub: $('headerSub')
   };
 
   var machines = [];          // registry from data/machines.json (+ status/stats)
@@ -224,15 +224,34 @@
   }
 
   function checkUpdate() {
-    if (!('serviceWorker' in navigator)) { alert('You are on ' + VERSION); return; }
+    var latest = null;
+    var verP = fetch('data/machines.json', { cache: 'no-store' }).then(function (r) { return r.json(); })
+      .then(function (j) { latest = j.appVersion || null; }).catch(function () {});
+    if (!('serviceWorker' in navigator)) {
+      verP.then(function () {
+        if (latest && latest !== VERSION && confirm('Version ' + latest + ' is available (you have ' + VERSION + '). Reload now?')) location.reload();
+        else alert('You are on ' + VERSION);
+      });
+      return;
+    }
     navigator.serviceWorker.getRegistration('./').then(function (reg) {
       return reg || navigator.serviceWorker.register('./sw.js', { scope: './', updateViaCache: 'none' });
     }).then(function (reg) {
-      return reg.update().then(function () { return new Promise(function (r) { setTimeout(r, 400); }); }).then(function () { return reg; });
-    }).then(function (reg) {
-      if (reg.waiting && confirm('New version found. Update now?\n\nCurrently ' + VERSION)) {
-        reg.waiting.postMessage({ type: 'SKIP_WAITING' });
-        setTimeout(function () { location.reload(); }, 800);
+      return Promise.all([reg.update().catch(function () {}), verP]).then(function () {
+        var nw = reg.installing || reg.waiting;
+        if (!nw) return false;
+        return new Promise(function (res) {
+          if (nw.state === 'activated') return res(true);
+          nw.addEventListener('statechange', function () { if (nw.state === 'activated' || nw.state === 'installed') res(true); });
+          setTimeout(function () { res(true); }, 8000);
+        }).then(function () { if (reg.waiting) reg.waiting.postMessage({ type: 'SKIP_WAITING' }); return true; });
+      });
+    }).then(function (found) {
+      var newer = latest && latest !== VERSION;
+      if (found || newer) {
+        if (confirm('New version found' + (latest ? ' (' + latest + ')' : '') + '. Update now?\n\nCurrently ' + VERSION)) {
+          setTimeout(function () { location.reload(); }, 300);
+        }
         return;
       }
       alert('You are on ' + VERSION + ' — already latest.');
@@ -267,7 +286,9 @@
       el.menu.classList.add('hidden');
       if (a === 'settings') {
         openSheet('<h2>Settings</h2><label for="apiKey">Gemini API key (this phone only)</label><input id="apiKey" type="password" autocomplete="off" placeholder="AIza…" value="' +
-          UI.esc(FMBGemini.getKey()) + '"><p class="meta">Answers + Google Search grounding. Never committed.</p><div class="row"><button type="button" data-close>Cancel</button><button type="button" class="primary" data-save-key>Save</button></div>');
+          UI.esc(FMBGemini.getKey()) + '"><p class="meta">Answers + Google Search grounding. Never committed.</p><div class="row"><button type="button" data-close>Cancel</button><button type="button" class="primary" data-save-key>Save</button></div>' +
+          '<div id="offBox">' + FMBOffline.sectionHtml(machines, UI.esc) + '</div>');
+        FMBOffline.fillSection($('offBox'), machines);
       } else if (a === 'about') {
         var lines = machines.map(function (m) {
           return '<p class="meta">' + UI.esc(m.name) + ': ' + (m.status === 'ready' ? ((m.stats && m.stats.pages) || 0) + ' pages' : 'coming soon') + '</p>';
@@ -299,18 +320,18 @@
       if (ed) { FMBServiceLog.all().then(function (rows) { openLogForm(rows.find(function (r) { return r.id === ed.getAttribute('data-sl-edit'); })); }); return; }
       var dl = t.closest('[data-sl-del]');
       if (dl && confirm('Delete this entry?')) { FMBServiceLog.remove(dl.getAttribute('data-sl-del')).then(function () { openLog(logMachine); }); return; }
+      var off = t.closest('[data-offline-dl]');
+      if (off) { FMBOffline.startFromButton(off, machines); return; }
       var lb = t.closest('[data-lb]');
-      if (lb) { el.lbImg.src = lb.getAttribute('data-lb'); el.lightbox.classList.remove('hidden'); }
+      if (lb) FMBViewer.openFrom(lb);
     });
     el.chat.addEventListener('click', function (e) {
       var lb = e.target.closest('[data-lb]');
-      if (lb) { el.lbImg.src = lb.getAttribute('data-lb'); el.lightbox.classList.remove('hidden'); }
+      if (lb) { FMBViewer.openFrom(lb); return; }
       var d = e.target.closest('[data-cause-done]');
       if (d && causeState) { causeState.idx = Number(d.getAttribute('data-cause-done')) + 1; addBubble('bot', UI.renderCauseCard(causeState.causes, causeState.idx)); }
       if (e.target.closest('[data-cause-fixed]')) { addBubble('bot', '<p>Glad that sorted it. Ask anytime if something else acts up.</p>'); causeState = null; }
     });
-    el.lbClose.addEventListener('click', function () { el.lightbox.classList.add('hidden'); });
-    el.lightbox.addEventListener('click', function (e) { if (e.target === el.lightbox) el.lightbox.classList.add('hidden'); });
 
     var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SR) {
@@ -329,6 +350,7 @@
     var cm = mById(current);
     if (current && (!cm || cm.status !== 'ready')) current = 'mf-135';
     index = FMBSearch.buildIndex(res.pages);
+    FMBViewer.setPages(res.pages, machines);
   }).then(bind).catch(function (e) {
     el.chat.innerHTML = '<div class="empty">Could not load data. ' + UI.esc(e.message || e) + '</div>';
     bind();

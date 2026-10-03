@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "appVersion": "V 1.1",
+  "appVersion": "V 1.2",
   "machines": [
     {
       "slug": "mf-135",
@@ -30,7 +30,7 @@
       "name": "2020 Subaru Forester",
       "short": "Forester",
       "notes": "SUV",
-      "meter": "miles"
+      "meter": "hours"
     },
     {
       "slug": "ryobi-zt",

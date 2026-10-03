@@ -1,10 +1,15 @@
-/* Frank's Maintenance Bots service worker */
-const CACHE = 'fmb-v1.1';
+/* Frank's Maintenance Bots service worker (V 1.2) */
+const VERSION = 'V 1.2';
+const CACHE = 'fmb-v1.2';          // app shell + data, replaced on every version bump
+const IMG_CACHE = 'fmb-full-v1';   // full-res diagrams + offline packs, survives app updates
 const SHELL = [
   './',
   './index.html',
   './css/app.css',
   './css/servicelog.css',
+  './css/viewer.css',
+  './js/viewer.js',
+  './js/offline.js',
   './js/ui.js',
   './js/app.js',
   './js/search.js',
@@ -27,7 +32,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
     for (const url of SHELL) {
-      try { await cache.add(url); } catch (e) { console.warn('[FMB SW] skip', url, e); }
+      try { await cache.add(new Request(url, { cache: 'reload' })); } catch (e) { console.warn('[FMB SW] skip', url, e); }
     }
     self.skipWaiting();
   })());
@@ -35,15 +40,29 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
+    const keep = [CACHE, IMG_CACHE];
     const keys = await caches.keys();
-    await Promise.all(keys.filter((k) => k !== CACHE && k.startsWith('fmb-')).map((k) => caches.delete(k)));
+    await Promise.all(keys.filter((k) => k.startsWith('fmb-') && !keep.includes(k)).map((k) => caches.delete(k)));
     await self.clients.claim();
   })());
 });
 
 self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
+  if (!event.data) return;
+  if (event.data.type === 'SKIP_WAITING') self.skipWaiting();
+  if (event.data.type === 'VERSION' && event.source) event.source.postMessage({ type: 'VERSION', version: VERSION });
 });
+
+const FULL_RE = /\/img\/full\/[^/]+\.(webp|png)$/;
+
+async function fullImage(req) {
+  const cache = await caches.open(IMG_CACHE);
+  const hit = await cache.match(req, { ignoreSearch: true });
+  if (hit) return hit;
+  const res = await fetch(req);
+  if (res && res.ok) cache.put(req, res.clone());
+  return res;
+}
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
@@ -54,6 +73,11 @@ self.addEventListener('fetch', (event) => {
     return;
   }
   if (url.origin !== self.location.origin) return;
+
+  if (FULL_RE.test(url.pathname)) {          // full-res diagrams: cache-first once viewed
+    event.respondWith(fullImage(req));
+    return;
+  }
 
   const isHTML = req.mode === 'navigate' || url.pathname.endsWith('/') || url.pathname.endsWith('.html');
   event.respondWith((async () => {
@@ -76,15 +100,11 @@ self.addEventListener('fetch', (event) => {
       }).catch(() => {});
       return cached;
     }
-    try {
-      const fresh = await fetch(req);
-      if (fresh && fresh.ok) {
-        const cache = await caches.open(CACHE);
-        cache.put(req, fresh.clone());
-      }
-      return fresh;
-    } catch (e) {
-      throw e;
+    const fresh = await fetch(req);
+    if (fresh && fresh.ok) {
+      const cache = await caches.open(CACHE);
+      cache.put(req, fresh.clone());
     }
+    return fresh;
   })());
 });

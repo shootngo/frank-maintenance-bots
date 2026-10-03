@@ -14,6 +14,7 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/servicelog.css">
+  <link rel="stylesheet" href="css/viewer.css">
 </head>
 <body>
   <div id="app">
@@ -21,7 +22,7 @@
       <img class="logo" src="icons/icon-192.png" alt="" width="40" height="40">
       <div class="grow">
         <h1>Frank's Maintenance Bots</h1>
-        <p class="sub" id="headerSub">Shop Q&amp;A · V 1.1</p>
+        <p class="sub" id="headerSub">Shop Q&amp;A · V 1.2</p>
       </div>
       <button type="button" class="icon-btn" id="btnMenu" aria-label="Menu">☰</button>
     </header>
@@ -30,7 +31,7 @@
       <button type="button" data-action="check-update">Check for update</button>
       <button type="button" data-action="service-log">Service log</button>
       <button type="button" data-action="settings">Settings</button>
-      <button type="button" data-action="about">About / V 1.1</button>
+      <button type="button" data-action="about">About / V 1.2</button>
       <button type="button" data-action="clear-chat">Clear chat</button>
     </div>
 
@@ -52,15 +53,14 @@
   </div>
 
   <div id="overlay" class="overlay hidden"></div>
-  <div id="lightbox" class="lightbox hidden" role="dialog" aria-modal="true">
-    <button type="button" class="lb-close" id="lbClose" aria-label="Close">✕</button>
-    <img id="lbImg" alt="Manual page">
-  </div>
 
   <script>
-    window.FMB_VERSION = 'V 1.1';
-    window.FMB_CACHE = 'fmb-v1.1';
+    window.FMB_VERSION = 'V 1.2';
+    window.FMB_CACHE = 'fmb-v1.2';
+    window.FMB_IMG_CACHE = 'fmb-full-v1';
   </script>
+  <script src="js/viewer.js"></script>
+  <script src="js/offline.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/search.js"></script>
   <script src="js/parts.js"></script>
